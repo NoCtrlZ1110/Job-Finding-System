@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { AppRouter } from "./AppRouter";
+import Background from "./img/back.jpg";
+
+// var sectionStyle = {
+//   width: "100%",
+//   // height: "600px",
+//   height: "59.2em",
+//   minHeight: "100%",
+//   backgroundImage: "url(" + Background + ") ",
+//   backgroundPosition: "center",
+//   backgroundSize: "cover",
+//   backgroundRepeat: "no-repeat",
+// };
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    // <section style={sectionStyle}>
+    <div
+      className="view"
+      style={{
+        backgroundImage: "url(" + Background + ") ",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center center",
+        minHeight: "947px",
+      }}
+    >
+      <AppRouter />
     </div>
   );
 }
