@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Home } from "./components/Home/HomePage";
 import { Select } from "./components/Select/Select";
 import { NotFound } from "./components/NotFound/NotFound";
+import { Employer } from "./components/Select/Employer/Employer";
+import { Employee } from "./components/Select/Employee/Employee";
 const routes = [
   {
     path: "/home",
@@ -14,10 +16,10 @@ const routes = [
     component: Select,
     exact: true,
   },
-  { path: "/select/employer", component: Select },
+  { path: "/select/employer", component: Employer },
   {
     path: "/select/employee",
-    component: Select,
+    component: Employee,
   },
   {
     path: "*",
