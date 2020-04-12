@@ -9,17 +9,18 @@ export class Select extends React.Component {
       <div>
         <div className="container">
           <div className="row">
-            <div className="col-md-12 mb-4 white-text text-center mx-4">
-              <br />
+            <div className="col-md-12  white-text text-center mx-4">
               <br />
               <br />
               <h1 className="font-weight-bold mb-0 pt-md-5 pt-5 mt-5 my-4">
                 Bạn là ai?
+                <br />
               </h1>
               <br />
               <br />
               <div className="row">
-                <div className="card col mx-5">
+                <div className="col-md-2"></div>
+                <div className="card col-md-4">
                   <div className="card-body">
                     <img className="mr-2" src={searchIcon} alt="Ứng Viên"></img>
                   </div>
@@ -27,7 +28,7 @@ export class Select extends React.Component {
                     <strong> Người Tìm Việc</strong>
                   </a>
                 </div>
-                <div className="card col mx-5">
+                <div className="card col-md-4 ml-3">
                   <div className="card-body">
                     <img
                       className="mr-2"

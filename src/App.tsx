@@ -2,17 +2,7 @@ import React from "react";
 import "./App.css";
 import { AppRouter } from "./AppRouter";
 import Background from "./img/back.jpg";
-
-// var sectionStyle = {
-//   width: "100%",
-//   // height: "600px",
-//   height: "59.2em",
-//   minHeight: "100%",
-//   backgroundImage: "url(" + Background + ") ",
-//   backgroundPosition: "center",
-//   backgroundSize: "cover",
-//   backgroundRepeat: "no-repeat",
-// };
+import { Navigator } from "./components/Navigator/Navigator";
 
 function App() {
   return (
@@ -27,6 +17,7 @@ function App() {
         minHeight: "947px",
       }}
     >
+      <Navigator />
       <AppRouter />
     </div>
   );
