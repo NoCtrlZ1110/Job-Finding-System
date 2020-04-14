@@ -1,10 +1,12 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Router, Switch, Route } from "react-router-dom";
 import { Home } from "./components/Home/HomePage";
 import { Select } from "./components/Select/Select";
 import { NotFound } from "./components/NotFound/NotFound";
-import { Employer } from "./components/Select/Employer/Employer";
-import { Employee } from "./components/Select/Employee/Employee";
+import { Employer } from "./components/Employer/Employer";
+import { Employee } from "./components/Employee/Employee";
+import history from "./services/history";
+
 const routes = [
   {
     path: "/home",
@@ -16,22 +18,22 @@ const routes = [
     component: Select,
     exact: true,
   },
-  { path: "/select/employer", component: Employer },
   {
-    path: "/select/employee",
+    path: "/employee",
     component: Employee,
+    exact: true,
   },
+  { path: "/employer", component: Employer },
   {
     path: "*",
     component: NotFound,
-    // direct: "/home",
   },
 ];
 
 export class AppRouter extends React.Component<{}> {
   render() {
     return (
-      <Router>
+      <Router history={history}>
         <Switch>
           {routes.map((route, i) => (
             <RouteWithSubRoutes key={i} {...route} />
@@ -42,7 +44,7 @@ export class AppRouter extends React.Component<{}> {
   }
 }
 
-function RouteWithSubRoutes(route: any) {
+export function RouteWithSubRoutes(route: any) {
   return (
     <Route
       path={route.path}

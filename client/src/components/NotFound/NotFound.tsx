@@ -1,8 +1,30 @@
-import React from "react";
-import { Redirect } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCoffee } from "@fortawesome/free-solid-svg-icons";
+import history from "../../services/history";
 
-export class NotFound extends React.Component {
-  render() {
-    return <Redirect to="/home" />;
-  }
-}
+export const NotFound: React.FC = () => {
+  const [count, setCount] = useState(5);
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      let time = count;
+      setCount(time - 1);
+      if (!count) history.push("/home");
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, [count]);
+
+  return (
+    <div className="text-center">
+      <br />
+      <br />
+      <h1>
+        <strong>
+          404 NOT FOUND <FontAwesomeIcon icon={faCoffee}></FontAwesomeIcon>
+        </strong>
+      </h1>
+      <h2>Bạn sẽ được chuyển về trang chủ sau {count} giây!</h2>
+    </div>
+  );
+};
