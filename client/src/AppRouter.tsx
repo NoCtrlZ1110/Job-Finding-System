@@ -9,7 +9,7 @@ import history from "./services/history";
 
 const routes = [
   {
-    path: "/home",
+    path: "/",
     component: Home,
     exact: true,
   },
