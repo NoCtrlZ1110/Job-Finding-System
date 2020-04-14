@@ -9,7 +9,7 @@ export const NotFound: React.FC = () => {
     const intervalId = setInterval(() => {
       let time = count;
       setCount(time - 1);
-      if (!count) history.push("/home");
+      if (!count) history.push("/");
     }, 1000);
 
     return () => clearInterval(intervalId);
