@@ -6,6 +6,8 @@ import { NotFound } from "./components/NotFound/NotFound";
 import { Employer } from "./components/Employer/Employer";
 import { Employee } from "./components/Employee/Employee";
 import history from "./services/history";
+import { FindJob } from "./components/Employee/Find/FindJob";
+import { CreateProfile } from "./components/Employee/CreateProfile/CreateProfile";
 
 const routes = [
   {
@@ -21,9 +23,13 @@ const routes = [
   {
     path: "/employee",
     component: Employee,
-    exact: true,
+    // exact: true,
+    routes: [
+      { path: "/employee/find", component: FindJob },
+      { path: "/employee/create", component: CreateProfile },
+    ],
   },
-  { path: "/employer", component: Employer },
+  { path: "/employer", component: Employer, exact: true },
   {
     path: "*",
     component: NotFound,

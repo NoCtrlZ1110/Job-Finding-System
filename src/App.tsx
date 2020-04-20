@@ -2,7 +2,7 @@ import React from "react";
 import "./App.css";
 import { AppRouter } from "./AppRouter";
 import Background from "./img/back.jpg";
-import { Navigator } from "./components/Navigator/Navigator";
+import { NavigationBar } from "./components/NavigationBar/NavigationBar";
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
         minHeight: "947px",
       }}
     >
-      <Navigator />
+      <NavigationBar />
       <AppRouter />
     </div>
   );

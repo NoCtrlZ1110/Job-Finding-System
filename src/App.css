@@ -1,0 +1,25 @@
+h1,
+h2,
+h3 {
+    color: #4181d4;
+}
+
+
+
+.btn {
+    max-width: 200px;
+    align-self: center;
+}
+
+.select {
+    max-width: 300px;
+}
+
+.card {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+Navbar {
+
+    color: white;
+}

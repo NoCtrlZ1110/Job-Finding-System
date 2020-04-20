@@ -1,6 +1,4 @@
 import React from "react";
-import "./HomePage.css";
-
 export class Home extends React.Component {
   render() {
     return (

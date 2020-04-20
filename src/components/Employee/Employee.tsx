@@ -1,22 +1,25 @@
-import React, { useState, useEffect } from "react";
-import history from "../../services/history";
+import React from "react";
+import { RouteWithSubRoutes } from "../../AppRouter";
+import { Switch, Link } from "react-router-dom";
 
-export const Employee: React.FC = () => {
-  const [count, setCount] = useState(5);
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      let time = count;
-      setCount(time - 1);
-      if (!count) history.push("/");
-    }, 1000);
-
-    return () => clearInterval(intervalId);
-  }, [count]);
-
+export const Employee: React.FC<{ routes: any }> = ({ routes }) => {
   return (
     <div className="text-center">
-      <h1>Tính năng đang được phát triển!</h1>
-      <h2>Bạn sẽ được chuyển về trang chủ sau {count} giây!</h2>
+      <h1>Bạn là người tìm việc!</h1>
+      {/* <div className="btn-group" role="group"> */}
+      <Link to="find" className="btn btn-success m-3">
+        Tìm kiếm việc làm
+      </Link>
+      <Link to="create" className="btn btn-info m-3">
+        Tạo hồ sơ việc làm
+      </Link>
+      <div className="my-5">
+        <Switch>
+          {routes.map((route: any, i: any) => (
+            <RouteWithSubRoutes key={i} {...route} />
+          ))}
+        </Switch>
+      </div>
     </div>
   );
 };

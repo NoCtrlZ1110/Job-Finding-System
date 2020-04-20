@@ -1,5 +1,4 @@
 import React from "react";
-import "./Select.css";
 import searchIcon from "../../img/search.png";
 import workIcon from "../../img/work.png";
 import { Link } from "react-router-dom";
@@ -21,7 +20,7 @@ export const Select: React.FC<any> = ({ routes }) => {
             <div className="row">
               <div className="col-md-2"></div>
               <div className="col">
-                <div className="card col-md-4">
+                <div className="card select col-md-4">
                   <div className="card-body">
                     <img className="mr-2" src={searchIcon} alt="Ứng Viên"></img>
                   </div>
@@ -31,7 +30,7 @@ export const Select: React.FC<any> = ({ routes }) => {
                 </div>
               </div>
               <div className="col ">
-                <div className="card col-md-4">
+                <div className="card select col-md-4">
                   <div className="card-body">
                     <img
                       className="mr-2"
