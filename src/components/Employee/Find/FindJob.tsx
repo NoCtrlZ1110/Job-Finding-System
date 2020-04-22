@@ -49,29 +49,53 @@ export const FindJob: React.FC = () => {
                       <option>Sửa ống nước</option>
                     </Form.Control>
                   </Form.Group>
-                  <Row className="mb-3">
-                    <Col>
-                      <label className="col-form-label">
-                        <b>Từ</b>
-                      </label>
-                      <input className="form-control col-10" type="date" />
-                    </Col>
-                    <Col>
-                      <label className="col-form-label">
-                        <b>Đến</b>
-                      </label>
-                      <input className="form-control " type="date" />
-                    </Col>
-                  </Row>
-                  <Form.Group controlId="formBasicEmail">
+
+                  <Form.Group>
                     <Form.Label>
                       <b>Mức lương mong muốn</b>
                     </Form.Label>
                     <Form.Control
                       type="destination"
-                      placeholder="Nhập khu vực bạn muốn tìm việc"
+                      placeholder="Đơn vị: Nghìn $/giờ"
                     />
                   </Form.Group>
+
+                  <Row className="mb-3">
+                    <Col>
+                      <Form.Group>
+                        <Form.Label>
+                          <b>Tỉnh Thành</b>
+                        </Form.Label>
+                        <Form.Control as="select">
+                          <option></option>
+                          <option>Hà Nội</option>
+                        </Form.Control>
+                      </Form.Group>
+                    </Col>
+                    <Col>
+                      <Form.Group>
+                        <Form.Label>
+                          <b>Khu Vực</b>
+                        </Form.Label>
+                        <Form.Control as="select">
+                          <option></option>
+                          <option>Ba Đình</option>
+                          <option>Bắc Từ Liêm</option>
+                          <option>Cầu Giấy</option>
+                          <option>Đống Đa</option>
+                          <option>Hà Đông</option>
+                          <option>Hai Bà Trưng</option>
+                          <option>Hoàn Kiếm</option>
+                          <option>Hoàng Mai</option>
+                          <option>Long Biên</option>
+                          <option>Nam Từ Liêm</option>
+                          <option>Tây Hồ</option>
+                          <option>Thanh Xuân</option>
+                          <option>Sơn Tây</option>
+                        </Form.Control>
+                      </Form.Group>
+                    </Col>
+                  </Row>
 
                   <div className="d-flex flex-row-reverse">
                     <Button

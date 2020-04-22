@@ -1,6 +1,46 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Get Started // bắt đầu
 
-## Available Scripts
+# Người Tìm việc // làm việc với người tìm việc
+
+## Tìm kiếm việc làm :
+
+- `khu vực`
+- `Loại Công việc`
+- `Thời gian`
+- `Mức lương` // nhập thông tin mình muốn tìm kiếm
+- `Tìm việc` // in ra các thông tin công việc mà người dùng mong muốn
+  - `chi tiết` : hiện ra đầy đủ thông tin liên quan đến công việc mà người tìm việc quan tâm
+    - tên công ty
+    - mã tuyển dụng
+    - địa chỉ
+    - loại công việc
+    - thời gian
+    - mức lương
+    - yêu cầu
+    - email
+    - ghi chú
+  - nhận việc : //điền thông tin đầy đủ của người tìm việc để gửi thông tin đến nhà tuyển dụng
+
+## Tạo hồ sơ xin việc : - Nhập thông tin cần thiết
+
+- Tạo Hồ sơ : // lưu thông tin người tìm việc
+
+# Nhà tuyển dụng // làm việc với nhà tuyển dụng
+
+2.1 Tìm kiếm ứng viên :
+// Nhập thông tin muốn tìm kiếm
+// tìm ứng viên
+// in ra thông tin các ứng viên
+
+- chi tiết :
+  // in ra thông tin đầy đủ của ứng viên
+- tuyển dụng :
+  // thông tin nhà tuyển dụng gửi đến người ứng tuyển
+  2.2 Tạo hồ sơ tuyển dụng :
+- Nhập thông tin cần thiết
+  - Tạo Hồ sơ : // lưu thông tin hồ sơ tuyển dụng
+
+## How to run :
 
 In the project directory, you can run:
 
