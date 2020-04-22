@@ -7,9 +7,9 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
 
-export const FindJob: React.FC = () => {
+export const CreateJob: React.FC = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -23,7 +23,7 @@ export const FindJob: React.FC = () => {
               <Card.Header>
                 <strong>
                   <h5>
-                    <b>TÌM KIẾM VIỆC LÀM</b>
+                    <b>TẠO HỒ SƠ TUYỂN DỤNG</b>
                   </h5>
                 </strong>
               </Card.Header>
@@ -36,7 +36,7 @@ export const FindJob: React.FC = () => {
                           <b>Tỉnh Thành</b>
                         </Form.Label>
                         <Form.Control as="select">
-                          <option></option>
+                          <option>---</option>
                           <option>Hà Nội</option>
                         </Form.Control>
                       </Form.Group>
@@ -67,6 +67,16 @@ export const FindJob: React.FC = () => {
                   </Row>
                   <Form.Group>
                     <Form.Label>
+                      <b>Tên công ty</b>
+                    </Form.Label>
+                    <Form.Control
+                      type="destination"
+                      placeholder="Nhập tên công ty của bạn"
+                    />
+                  </Form.Group>
+
+                  <Form.Group>
+                    <Form.Label>
                       <b>Loại công việc</b>
                     </Form.Label>
                     <Form.Control as="select">
@@ -79,24 +89,12 @@ export const FindJob: React.FC = () => {
 
                   <Form.Group>
                     <Form.Label>
-                      <b>Mức lương mong muốn</b>
+                      <b>Mức lương</b>
                     </Form.Label>
                     <Form.Control
-                      type="destination"
-                      placeholder="Đơn vị: Nghìn $/giờ"
+                      type="salary"
+                      placeholder="Đơn vị: nghìn $/giờ"
                     />
-                  </Form.Group>
-
-                  <Form.Group>
-                    <Form.Label>
-                      <b>Thời gian làm việc</b>
-                    </Form.Label>
-                    <Form.Control as="select">
-                      <option>---</option>
-                      <option>Ca sáng</option>
-                      <option>Ca tối</option>
-                      <option>Cả ngày</option>
-                    </Form.Control>
                   </Form.Group>
 
                   <div className="d-flex flex-row-reverse">
@@ -106,8 +104,10 @@ export const FindJob: React.FC = () => {
                       // type="submit"
                       onClick={handleShow}
                     >
-                      <b>Tìm kiếm</b>
-                      <FontAwesomeIcon className="ml-2" icon={faSearch} />
+                      <b>
+                        Tạo Hồ Sơ
+                        <FontAwesomeIcon className="ml-2" icon={faPlusCircle} />
+                      </b>
                     </Button>
                   </div>
                   <Row>
@@ -121,10 +121,10 @@ export const FindJob: React.FC = () => {
       </Container>
       <Modal show={show} onHide={handleClose} centered size="lg">
         <Modal.Header closeButton>
-          <Modal.Title>Kết quả tìm kiếm</Modal.Title>
+          <Modal.Title>Tạo hồ sơ</Modal.Title>
         </Modal.Header>
-        <Modal.Body className="search">
-          <h2>Woohoo, không tìm thấy kết quả nào!</h2>
+        <Modal.Body>
+          <h2>Đã tạo hồ sơ thành công!</h2>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="danger" onClick={handleClose}>

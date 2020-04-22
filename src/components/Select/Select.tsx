@@ -11,7 +11,7 @@ export const Select: React.FC<any> = ({ routes }) => {
           <div className="col-md-12  white-text text-center mx-4">
             <br />
             <br />
-            <h1 className="font-weight-bold mb-0 pt-md-5 pt-5 mt-5 my-4">
+            <h1 className="font-weight-bold ">
               Bạn là ai?
               <br />
             </h1>

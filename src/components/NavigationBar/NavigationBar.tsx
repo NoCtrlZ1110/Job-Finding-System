@@ -20,8 +20,16 @@ export class NavigationBar extends React.Component {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/select/">Select</Nav.Link>
+            <Nav.Link href="/">
+              <b>Trang Chủ </b>
+            </Nav.Link>
+
+            <Nav.Link href="/employee/">
+              <b>Tìm Việc</b>
+            </Nav.Link>
+            <Nav.Link href="/employer/">
+              <b>Tuyển Dụng</b>
+            </Nav.Link>
             <NavDropdown title="Dropdown" id="basic-nav-dropdown"></NavDropdown>
           </Nav>
           <Form inline>
