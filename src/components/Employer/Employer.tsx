@@ -1,7 +1,9 @@
 import React from "react";
 import { RouteWithSubRoutes } from "../../AppRouter";
 import { Switch, Link } from "react-router-dom";
-
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 export const Employer: React.FC<{ routes: any }> = ({ routes }) => {
   return (
     <div className="text-center">
@@ -14,11 +16,17 @@ export const Employer: React.FC<{ routes: any }> = ({ routes }) => {
         Tạo hồ sơ tuyển dụng
       </Link>
       <div className="my-5">
-        <Switch>
-          {routes.map((route: any, i: any) => (
-            <RouteWithSubRoutes key={i} {...route} />
-          ))}
-        </Switch>
+        <Container>
+          <Row>
+            <Col>
+              <Switch>
+                {routes.map((route: any, i: any) => (
+                  <RouteWithSubRoutes key={i} {...route} />
+                ))}
+              </Switch>
+            </Col>
+          </Row>
+        </Container>
       </div>
     </div>
   );

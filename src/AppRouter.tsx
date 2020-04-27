@@ -1,15 +1,17 @@
 import React from "react";
+import history from "./services/history";
 import { Router, Switch, Route } from "react-router-dom";
 import { Home } from "./components/Home/HomePage";
 import { Select } from "./components/Select/Select";
 import { NotFound } from "./components/NotFound/NotFound";
 import { Employer } from "./components/Employer/Employer";
 import { Employee } from "./components/Employee/Employee";
-import history from "./services/history";
 import { FindJob } from "./components/Employee/Find/FindJob";
 import { CreateProfile } from "./components/Employee/CreateProfile/CreateProfile";
 import { FindEmployee } from "./components/Employer/FindEmployee/FindEmployee";
 import { CreateJob } from "./components/Employer/CreateJob/CreateJob";
+import { List } from "./components/List/List";
+import { EmployeeList } from "./components/List/EmployeeList/EmployeeList";
 
 const routes = [
   {
@@ -37,6 +39,14 @@ const routes = [
     routes: [
       { path: "/employer/find", component: FindEmployee },
       { path: "/employer/create", component: CreateJob },
+    ],
+  },
+  {
+    path: "/list",
+    component: List,
+    routes: [
+      { path: "/list/employee", component: EmployeeList },
+      { path: "/list/employer", component: CreateJob },
     ],
   },
   {

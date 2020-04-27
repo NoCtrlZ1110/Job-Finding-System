@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import FormControl from "react-bootstrap/FormControl";
@@ -20,17 +20,26 @@ export class NavigationBar extends React.Component {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="/">
+            <Nav.Link className="mr-2" href="/">
               <b>Trang Chủ </b>
             </Nav.Link>
 
-            <Nav.Link href="/employee/">
-              <b>Tìm Việc</b>
+            <Nav.Link className="mr-2" href="/employee/">
+              <b>Tìm Việc </b>
             </Nav.Link>
-            <Nav.Link href="/employer/">
-              <b>Tuyển Dụng</b>
+            <Nav.Link className="mr-2" href="/employer/">
+              <b>Tuyển Dụng </b>
             </Nav.Link>
-            <NavDropdown title="Dropdown" id="basic-nav-dropdown"></NavDropdown>
+            <b>
+              <NavDropdown title="Thống Kê" id="dropdown">
+                <NavDropdown.Item href="/list/employee">
+                  Employees List
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/list/employer">
+                  Employers List
+                </NavDropdown.Item>
+              </NavDropdown>
+            </b>
           </Nav>
           <Form inline>
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />

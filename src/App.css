@@ -15,6 +15,11 @@ h3 {
     max-width: 300px;
 }
 
+/* 
+.listE {
+    min-width: 90em;
+} */
+
 .card {
     background-color: rgba(255, 255, 255, 0.4);
 }

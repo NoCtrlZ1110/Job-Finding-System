@@ -10,6 +10,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "@types/axios": "^0.14.0",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
@@ -22,13 +23,15 @@
     "plop": "^2.6.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.0",
+    "react-bootstrap-table-next": "^4.0.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.1",
+    "request": "^2.88.2",
     "typescript": "~3.7.2"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -49,6 +52,8 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.1.4"
+    "@types/react-bootstrap-table-next": "^4.0.2",
+    "@types/react-router-dom": "^5.1.4",
+    "@types/request": "^2.48.4"
   }
 }
