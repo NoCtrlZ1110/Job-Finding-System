@@ -7,7 +7,7 @@ import HTTP from "../../../services/request";
 
 export const EmployerList: React.FC = () => {
   const getEmployer = () => {
-    return JSON.parse(HTTP.httpGet(HTTP.SERVER + "employer/list"));
+    return JSON.parse(HTTP.httpGet("/employer/list"));
   };
 
   const columns = [
