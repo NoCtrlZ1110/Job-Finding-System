@@ -12,6 +12,7 @@ import { FindEmployee } from "./components/Employer/FindEmployee/FindEmployee";
 import { CreateJob } from "./components/Employer/CreateJob/CreateJob";
 import { List } from "./components/List/List";
 import { EmployeeList } from "./components/List/EmployeeList/EmployeeList";
+import { EmployerList } from "./components/List/EmployerList/EmployerList";
 
 const routes = [
   {
@@ -46,7 +47,7 @@ const routes = [
     component: List,
     routes: [
       { path: "/list/employee", component: EmployeeList },
-      { path: "/list/employer", component: CreateJob },
+      { path: "/list/employer", component: EmployerList },
     ],
   },
   {

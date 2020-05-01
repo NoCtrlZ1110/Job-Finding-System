@@ -3,29 +3,21 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import BootstrapTable from "react-bootstrap-table-next";
 import Button from "react-bootstrap/Button";
-var HTTP = require("../../../services/request");
+import HTTP from "../../../services/request";
 
-export const EmployeeList: React.FC = () => {
-  const getEmployee = () => {
-    return JSON.parse(HTTP.httpGet(HTTP.SERVER + "employee/list"));
+export const EmployerList: React.FC = () => {
+  const getEmployer = () => {
+    return JSON.parse(HTTP.httpGet(HTTP.SERVER + "employer/list"));
   };
 
   const columns = [
     {
-      dataField: "employee_id",
+      dataField: "employer_id",
       text: "ID",
     },
     {
       dataField: "name",
       text: "Name",
-    },
-    {
-      dataField: "sex",
-      text: "Sex",
-    },
-    {
-      dataField: "age",
-      text: "Age",
     },
     {
       dataField: "area",
@@ -40,6 +32,10 @@ export const EmployeeList: React.FC = () => {
       text: "Ngành",
     },
     {
+      dataField: "job_detail",
+      text: "Cụ thể",
+    },
+    {
       dataField: "time",
       text: "Thời gian",
     },
@@ -48,8 +44,12 @@ export const EmployeeList: React.FC = () => {
       text: "Lương mong muốn",
     },
     {
-      dataField: "talent",
-      text: "Điểm mạnh",
+      dataField: "request",
+      text: "Yêu cầu",
+    },
+    {
+      dataField: "contact",
+      text: "Liên hệ",
     },
     {
       dataField: "comment",
@@ -77,7 +77,7 @@ export const EmployeeList: React.FC = () => {
         <Card.Body>
           <BootstrapTable
             keyField="id"
-            data={getEmployee()}
+            data={getEmployer()}
             columns={columns}
           />
         </Card.Body>

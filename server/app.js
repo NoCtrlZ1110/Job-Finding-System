@@ -9,6 +9,18 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var mysql = require("./db");
 var app = express();
+
+//
+const favicon = require("express-favicon");
+
+app.use(favicon(__dirname + "/../client/build/favicon.ico"));
+app.use(express.static(__dirname + "/../client"));
+app.use(express.static(path.join(__dirname + "/../client", "build")));
+app.get("/ping", function (req, res) {
+  return res.send("Ok!");
+});
+
+//
 app.use(function (req, res, next) {
   // Website you wish to allow to connect
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -176,6 +188,10 @@ app.post("/employer/find/:id/apply", function (req, res) {
   mysql.query(sql, [email, req.params.id], function (err, response) {
     res.json("done");
   });
+});
+
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname + "/../client", "build", "index.html"));
 });
 
 // catch 404 and forward to error handler
