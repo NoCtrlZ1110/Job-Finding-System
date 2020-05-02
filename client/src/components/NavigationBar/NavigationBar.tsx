@@ -43,7 +43,7 @@ export class NavigationBar extends React.Component {
           </Nav>
           <Form inline>
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-success">
+            <Button href="/select" variant="outline-success">
               <FontAwesomeIcon icon={faSearch} />
             </Button>
           </Form>

@@ -2,12 +2,11 @@ import React from "react";
 
 import Card from "react-bootstrap/Card";
 import BootstrapTable from "react-bootstrap-table-next";
-import Button from "react-bootstrap/Button";
 import HTTP from "../../../services/request";
 
 export const EmployeeList: React.FC = () => {
   const getEmployee = () => {
-    return JSON.parse(HTTP.httpGet("/employee/list"));
+    return JSON.parse(HTTP.httpGet(HTTP.SERVER + "employee/list"));
   };
 
   const columns = [
@@ -56,10 +55,15 @@ export const EmployeeList: React.FC = () => {
       text: "Ghi chú",
     },
     {
-      dataField: "Button",
+      dataField: "employee_id",
       text: "Action",
       formatter: (cellContent: any, row: any) => {
-        return <Button variant="success">Chi tiết</Button>;
+        let link = `/employee/info/${cellContent}`;
+        return (
+          <a className="btn btn-success" href={link}>
+            Chi tiết
+          </a>
+        );
       },
     },
   ];

@@ -13,6 +13,8 @@ import { CreateJob } from "./components/Employer/CreateJob/CreateJob";
 import { List } from "./components/List/List";
 import { EmployeeList } from "./components/List/EmployeeList/EmployeeList";
 import { EmployerList } from "./components/List/EmployerList/EmployerList";
+import { EmployeeInfo } from "./components/Employee/Info/EmployeeInfo";
+import { EmployerInfo } from "./components/Employer/Info/EmployerInfo";
 
 const routes = [
   {
@@ -25,13 +27,15 @@ const routes = [
     component: Select,
     exact: true,
   },
+  { path: "/employee/info/:id", component: EmployeeInfo },
+  { path: "/employer/info/:id", component: EmployerInfo },
   {
     path: "/employee",
     component: Employee,
     // exact: true,
     routes: [
-      { path: "/employee/find", component: FindJob },
-      { path: "/employee/create", component: CreateProfile },
+      { path: "/employee/find", component: FindJob, exact: true },
+      { path: "/employee/create", component: CreateProfile, exact: true },
     ],
   },
   {
