@@ -34,14 +34,6 @@ export const CreateProfile: React.FC = () => {
 
     console.log(data);
 
-    // fetch(HTTP.SERVER + "employee/create", {
-    //   method: "POST",
-    //   // headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(data),
-    // });
-
-    // HTTP.httpPost(HTTP.SERVER + "employee/create", JSON.stringify(data));
-
     const requestOptions = {
       method: "POST",
       headers: {
