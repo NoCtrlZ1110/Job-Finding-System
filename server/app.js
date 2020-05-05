@@ -4,6 +4,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var bodyParser = require("body-parser");
+var cors = require("cors");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -20,7 +21,20 @@ app.get("/ping", function (req, res) {
   return res.send("Ok!");
 });
 
-//
+// view engine setup
+app.use(cors());
+app.use(express.json());
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "jade");
+app.use(logger("dev"));
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "public")));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use("/", indexRouter);
+app.use("/users", usersRouter);
 app.use(function (req, res, next) {
   // Website you wish to allow to connect
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -34,41 +48,21 @@ app.use(function (req, res, next) {
   // Request headers you wish to allow
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type"
+    "Origin, Content-Type, X-Auth-Token"
   );
 
   // Set to true if you need the website to include cookies in the requests sent
   // to the API (e.g. in case you use sessions)
   res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Content-Type", "application/json");
 
   // Pass to next layer of middleware
   next();
 });
 
-// view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
-
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, "public")));
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
-
 setInterval(function () {
   mysql.query("SELECT 1");
 }, 5000);
-
-// routeroute
-// app.use('/employee', employeeFind);
-// app.use('/employee', employeeCreate);
-// app.use('/employee', employeeIdFind);
-// app.use('/employee', employeeIdApply);
 
 // employee
 app.get("/employee/list", function (req, res) {
@@ -80,6 +74,8 @@ app.get("/employee/list", function (req, res) {
 
 app.post("/employee/create", function (req, res) {
   var data = req.body;
+  console.log(data);
+
   var sql =
     "insert into employee(name,sex,age,area,address,job,job_detail,time,salary,talent,contact,comment) value (?,?,?,?,?,?,?,?,?,?,?,?)";
   mysql.query(
@@ -142,6 +138,8 @@ app.get("/employer/list", function (req, res) {
 
 app.post("/employer/create", function (req, res) {
   var data = req.body;
+  console.log(data);
+
   var sql =
     "insert into employer(name,area,address,job,job_detail,time,salary,request,contact,comment) value (?,?,?,?,?,?,?,?,?,?)";
   mysql.query(
