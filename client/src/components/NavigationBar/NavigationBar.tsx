@@ -11,44 +11,48 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 export class NavigationBar extends React.Component {
   render() {
     return (
-      <Navbar expand="lg">
-        <Navbar.Brand href="/">
-          <strong style={{ color: "brown" }}>
-            Job Finding <FontAwesomeIcon icon={faSearch} />
-          </strong>
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-            <Nav.Link className="mr-2" href="/">
-              <b>Trang Chủ </b>
-            </Nav.Link>
-
-            <Nav.Link className="mr-2" href="/employee/">
-              <b>Tìm Việc </b>
-            </Nav.Link>
-            <Nav.Link className="mr-2" href="/employer/">
-              <b>Tuyển Dụng </b>
-            </Nav.Link>
+      <>
+        <Navbar className="shadow p-3 mb-5 bg-blue rounded" expand="lg">
+          <Navbar.Brand href="/">
+            <span className="btn-outline-danger" style={{ color: "brown" }}>
+              <b>
+                Job Finding <FontAwesomeIcon icon={faSearch} />
+              </b>
+            </span>
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+              <Button className="mx-2 btn-md btn-info" href="/employee/">
+                <b>Tìm Việc </b>
+              </Button>
+              <Button className="mx-2 btn-md btn-info" href="/employer/">
+                <b>Tuyển Dụng </b>
+              </Button>
+            </Nav>
             <b>
               <NavDropdown title="Thống Kê" id="dropdown">
                 <NavDropdown.Item href="/list/employee">
-                  Employees List
+                  Ứng viên
                 </NavDropdown.Item>
                 <NavDropdown.Item href="/list/employer">
-                  Employers List
+                  Nhà tuyển dụng
                 </NavDropdown.Item>
               </NavDropdown>
             </b>
-          </Nav>
-          <Form inline>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button href="/select" variant="outline-success">
-              <FontAwesomeIcon icon={faSearch} />
-            </Button>
-          </Form>
-        </Navbar.Collapse>
-      </Navbar>
+            <Form inline>
+              <FormControl
+                type="text"
+                placeholder="Search"
+                className="mr-sm-2 "
+              />
+              <Button href="/select" variant="outline-success">
+                <FontAwesomeIcon icon={faSearch} />
+              </Button>
+            </Form>
+          </Navbar.Collapse>
+        </Navbar>
+      </>
     );
   }
 }

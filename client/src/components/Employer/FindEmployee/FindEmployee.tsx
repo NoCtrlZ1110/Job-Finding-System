@@ -66,9 +66,17 @@ export const FindEmployee: React.FC = () => {
               <b>Loại công việc</b>
             </Form.Label>
             <Form.Control as="select">
-              <option>Công nghệ thông tin</option>
-              <option>Thiết kế đồ hoạ</option>
-              <option>Sửa ống nước</option>
+              <option>---</option>
+              <option>C</option>
+              <option>C++</option>
+              <option>Java</option>
+              <option>Web</option>
+              <option>Front-end</option>
+              <option>Back-end</option>
+              <option>Mobile App</option>
+              <option>Data Science</option>
+              <option>Machine Learning</option>
+              <option>Artificial Intelligence</option>
             </Form.Control>
           </Form.Group>
           <Form>

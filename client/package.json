@@ -25,6 +25,7 @@
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.0",
     "react-bootstrap-table-next": "^4.0.1",
+    "react-bootstrap-table2-paginator": "^2.1.2",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.4.1",
@@ -54,6 +55,7 @@
   },
   "devDependencies": {
     "@types/react-bootstrap-table-next": "^4.0.2",
+    "@types/react-bootstrap-table2-paginator": "^2.1.0",
     "@types/react-router-dom": "^5.1.4",
     "@types/request": "^2.48.4"
   }
