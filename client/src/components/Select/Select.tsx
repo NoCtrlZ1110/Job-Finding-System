@@ -19,16 +19,6 @@ export const Select: React.FC<any> = ({ routes }) => {
             <br />
             <div className="row">
               <div className="col-md-2"></div>
-              <div className="col">
-                <div className="card select col-md-4">
-                  <div className="card-body">
-                    <img className="mr-2" src={searchIcon} alt="Ứng Viên"></img>
-                  </div>
-                  <Link className="btn btn-success m-3 btn-lg" to="/employee/">
-                    <strong> Người Tìm Việc</strong>
-                  </Link>
-                </div>
-              </div>
               <div className="col ">
                 <div className="card select col-md-4">
                   <div className="card-body">
@@ -40,6 +30,16 @@ export const Select: React.FC<any> = ({ routes }) => {
                   </div>
                   <Link className="btn btn-success m-3 btn-lg" to="/employer/">
                     <strong>Nhà Tuyển Dụng</strong>
+                  </Link>
+                </div>
+              </div>
+              <div className="col">
+                <div className="card select col-md-4">
+                  <div className="card-body">
+                    <img className="mr-2" src={searchIcon} alt="Ứng Viên"></img>
+                  </div>
+                  <Link className="btn btn-success m-3 btn-lg" to="/employee/">
+                    <strong> Người Tìm Việc</strong>
                   </Link>
                 </div>
               </div>

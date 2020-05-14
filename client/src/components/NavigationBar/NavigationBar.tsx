@@ -14,7 +14,7 @@ export class NavigationBar extends React.Component {
       <>
         <Navbar className="shadow p-3 mb-5 bg-blue rounded" expand="lg">
           <Navbar.Brand href="/">
-            <span className="btn-outline-danger" style={{ color: "brown" }}>
+            <span>
               <b>
                 Job Finding <FontAwesomeIcon icon={faSearch} />
               </b>
@@ -23,11 +23,11 @@ export class NavigationBar extends React.Component {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Button className="mx-2 btn-md btn-info" href="/employee/">
-                <b>Tìm Việc </b>
-              </Button>
               <Button className="mx-2 btn-md btn-info" href="/employer/">
                 <b>Tuyển Dụng </b>
+              </Button>
+              <Button className="mx-2 btn-md btn-info" href="/employee/">
+                <b>Tìm Việc </b>
               </Button>
             </Nav>
             <b>

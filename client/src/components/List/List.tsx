@@ -1,6 +1,6 @@
 import React from "react";
 import { RouteWithSubRoutes } from "../../AppRouter";
-import { Switch, Link } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
@@ -17,13 +17,6 @@ export const List: React.FC<{ routes: any }> = ({ routes }) => {
             <h3 className="text-uppercase m-3 blockqoute ">
               <strong>Thống kê nhà tuyển dụng và người tìm việc hiện có</strong>
             </h3>
-            <br />
-            <Link to="employee" className="btn btn-success m-3">
-              Người tìm việc
-            </Link>
-            <Link to="employer" className="btn btn-info m-3">
-              Nhà tuyển dụng
-            </Link>
             <div className="my-5">
               <Container>
                 <Row>

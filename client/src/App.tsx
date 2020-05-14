@@ -14,6 +14,9 @@ function App() {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundPosition: "center center",
+        width: "100%",
+
+        backgroundAttachment: "fixed",
         minHeight: "947px",
       }}
     >

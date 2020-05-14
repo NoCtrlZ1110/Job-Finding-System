@@ -1,9 +1,12 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import BootstrapTable from "react-bootstrap-table-next";
 import HTTP from "../../../services/request";
 import paginationFactory from "react-bootstrap-table2-paginator";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Button from "react-bootstrap/Button";
 
 export const EmployerList: React.FC = () => {
   const getEmployer = () => {
@@ -78,11 +81,25 @@ export const EmployerList: React.FC = () => {
 
   return (
     <>
-      <Card className="listE" style={{ color: "#2665b8" }}>
+      <Card className="list" style={{ color: "#2665b8" }}>
         <Card.Header>
           <strong>
             <h5>
-              <b>EmployeeList</b>
+              <Row>
+                <Col>
+                  <div className="mt-3">
+                    <strong>THỐNG KÊ TẤT CẢ NHÀ TUYỂN DỤNG</strong>
+                  </div>
+                </Col>
+                <Col style={{ textAlign: "right" }}>
+                  <Link to="employee" className="btn btn-info mx-2 mt-2">
+                    Người tìm việc
+                  </Link>
+                  <Button disabled className="btn btn-info mx-2 mt-2">
+                    Nhà tuyển dụng
+                  </Button>
+                </Col>
+              </Row>
             </h5>
           </strong>
         </Card.Header>
