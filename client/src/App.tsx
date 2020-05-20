@@ -14,7 +14,10 @@ function App() {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundPosition: "center center",
-        minHeight: "947px",
+        width: "100%",
+        minHeight: window.innerHeight,
+
+        backgroundAttachment: "fixed",
       }}
     >
       <NavigationBar />
