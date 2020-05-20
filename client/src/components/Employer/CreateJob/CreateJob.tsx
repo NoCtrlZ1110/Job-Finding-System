@@ -7,11 +7,45 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import HTTP from "../../../services/request";
+import history from "../../../services/history";
 
 export const CreateJob: React.FC = () => {
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    history.push("/list/employer");
+  };
   const handleShow = () => setShow(true);
+
+  const handleSubmit = (event: any) => {
+    event.preventDefault();
+    const data = {
+      name: event.target.elements.name.value,
+      area: event.target.elements.area.value,
+      address: event.target.elements.address.value,
+      job: event.target.elements.job.value,
+      job_detail: event.target.elements.job_detail.value,
+      time: event.target.elements.time.value,
+      salary: event.target.elements.salary.value,
+      request: event.target.elements.request.value,
+      contact: event.target.elements.contact.value,
+      comment: event.target.elements.comment.value,
+    };
+
+    console.log(data);
+
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    };
+    fetch(HTTP.SERVER + "employer/create", requestOptions)
+      .then((response) => response.json())
+      .then(() => handleShow());
+  };
 
   return (
     <>
@@ -24,7 +58,7 @@ export const CreateJob: React.FC = () => {
           </strong>
         </Card.Header>
         <Card.Body style={{ textAlign: "left" }}>
-          <Form>
+          <Form onSubmit={handleSubmit}>
             <Row>
               <Col>
                 <Row>
@@ -185,8 +219,8 @@ export const CreateJob: React.FC = () => {
               <Button
                 className="btn-md my-3 mx-2"
                 variant="primary"
-                // type="submit"
-                onClick={handleShow}
+                type="submit"
+                // onClick={handleShow}
               >
                 <b>
                   Tạo Hồ Sơ

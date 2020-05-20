@@ -108,7 +108,40 @@ app.get("/employee/find/:id", function (req, res) {
 
 app.all("/employee/find", function (req, res) {
   var data = req.body;
-  var sql =
+  var search = [];
+  var string = "select * from employer where ";
+  let count = 0;
+  if (data.area) {
+    search.push(data.area);
+    string += "area = ? ";
+    count++;
+  }
+  if (data.job) {
+    search.push(data.job);
+    if (count > 0) string += "and job = ? ";
+    else string += "job = ? ";
+    count++;
+  }
+  if (data.time) {
+    search.push(data.time);
+    if (count > 0) string += "and time = ? ";
+    else string += "time = ? ";
+    count++;
+  }
+  if (data.salary) {
+    search.push(data.salary);
+    if (count > 0) string += "and salary >= ? ";
+    else string += "salary >= ? ";
+    count++;
+  }
+  var sql = string + "and apply is null";
+  console.log(sql + "-" + count);
+
+  mysql.query(sql, search, function (err, response) {
+    res.json(response);
+  });
+
+  /* var sql =
     "select * from employer where area = ? and job = ? and time = ? and salary >= ? and apply is null";
 
   mysql.query(sql, [data.area, data.job, data.time, data.salary], function (
@@ -116,7 +149,7 @@ app.all("/employee/find", function (req, res) {
     response
   ) {
     res.json(response);
-  });
+  }); */
 });
 
 app.post("/employee/find/:id/apply", function (req, res) {
