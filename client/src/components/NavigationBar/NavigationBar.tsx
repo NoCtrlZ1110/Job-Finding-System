@@ -40,7 +40,7 @@ export class NavigationBar extends React.Component {
                 </NavDropdown.Item>
               </NavDropdown>
             </b>
-            <Form inline>
+            {/* <Form inline>
               <FormControl
                 type="text"
                 placeholder="Search"
@@ -49,7 +49,10 @@ export class NavigationBar extends React.Component {
               <Button href="/select" variant="outline-success">
                 <FontAwesomeIcon icon={faSearch} />
               </Button>
-            </Form>
+            </Form> */}
+            <Button className="mx-2 btn-md btn-info" href="/login/">
+              <b>Đăng Nhập</b>
+            </Button>
           </Navbar.Collapse>
         </Navbar>
       </>

@@ -15,11 +15,17 @@ import { EmployeeList } from "./components/List/EmployeeList/EmployeeList";
 import { EmployerList } from "./components/List/EmployerList/EmployerList";
 import { EmployeeInfo } from "./components/Employee/Info/EmployeeInfo";
 import { EmployerInfo } from "./components/Employer/Info/EmployerInfo";
+import Login from "./components/Login/Login";
 
 const routes = [
   {
     path: "/",
     component: Home,
+    exact: true,
+  },
+  {
+    path: "/login",
+    component: Login,
     exact: true,
   },
   {

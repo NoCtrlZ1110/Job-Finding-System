@@ -216,7 +216,7 @@ export const FindEmployee: React.FC = () => {
         </Card.Body>
       </Card>
 
-      <Modal show={show} onHide={handleClose} centered size="lg">
+      <Modal show={show} onHide={handleClose} centered size="lg" id="resultModal">
         <Modal.Header closeButton>
           <Modal.Title>Kết quả tìm kiếm</Modal.Title>
         </Modal.Header>

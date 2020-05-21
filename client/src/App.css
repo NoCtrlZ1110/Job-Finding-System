@@ -41,3 +41,7 @@ hr {
 table {
     table-layout: auto;
 }
+
+#resultModal {
+    min-width: 1000px;
+}
