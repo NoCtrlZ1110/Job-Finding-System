@@ -15,6 +15,8 @@ import { EmployeeList } from "./components/List/EmployeeList/EmployeeList";
 import { EmployerList } from "./components/List/EmployerList/EmployerList";
 import { EmployeeInfo } from "./components/Employee/Info/EmployeeInfo";
 import { EmployerInfo } from "./components/Employer/Info/EmployerInfo";
+import Login from "./components/Login/Login";
+import { Profile } from "./components/Profile/Profile";
 
 const routes = [
   {
@@ -23,10 +25,16 @@ const routes = [
     exact: true,
   },
   {
+    path: "/login",
+    component: Login,
+    exact: true,
+  },
+  {
     path: "/select",
     component: Select,
     exact: true,
   },
+  { path: "/profile", component: Profile },
   { path: "/employee/info/:id", component: EmployeeInfo },
   { path: "/employer/info/:id", component: EmployerInfo },
   {
@@ -60,18 +68,16 @@ const routes = [
   },
 ];
 
-export class AppRouter extends React.Component<{}> {
-  render() {
-    return (
-      <Router history={history}>
-        <Switch>
-          {routes.map((route, i) => (
-            <RouteWithSubRoutes key={i} {...route} />
-          ))}
-        </Switch>
-      </Router>
-    );
-  }
+export function AppRouter(props: any) {
+  return (
+    <Router history={history}>
+      <Switch>
+        {routes.map((route, i) => (
+          <RouteWithSubRoutes key={i} {...route} />
+        ))}
+      </Switch>
+    </Router>
+  );
 }
 
 export function RouteWithSubRoutes(route: any) {

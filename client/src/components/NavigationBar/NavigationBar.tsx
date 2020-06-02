@@ -2,9 +2,7 @@ import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
-import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import FormControl from "react-bootstrap/FormControl";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
@@ -40,7 +38,7 @@ export class NavigationBar extends React.Component {
                 </NavDropdown.Item>
               </NavDropdown>
             </b>
-            <Form inline>
+            {/* <Form inline>
               <FormControl
                 type="text"
                 placeholder="Search"
@@ -49,7 +47,10 @@ export class NavigationBar extends React.Component {
               <Button href="/select" variant="outline-success">
                 <FontAwesomeIcon icon={faSearch} />
               </Button>
-            </Form>
+            </Form> */}
+            <Button className="mx-2 btn-md btn-info" href="/login/">
+              <b>Đăng Nhập</b>
+            </Button>
           </Navbar.Collapse>
         </Navbar>
       </>
