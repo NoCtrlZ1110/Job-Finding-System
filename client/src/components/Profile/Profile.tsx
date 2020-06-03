@@ -2,10 +2,12 @@ import React from "react";
 import Button from "react-bootstrap/Button";
 import HTTP from "../../services/request";
 import history from "../../services/history";
+import axios from "axios";
 
 export const Profile: React.FC<{ routes: any }> = ({ routes }) => {
-  fetch(HTTP.SERVER + "employee/profile")
-    .then((response) => response.json())
+  axios
+    .get(HTTP.SERVER + "status", { withCredentials: true })
+    .then((response) => response.data)
     .then((message) => {
       if (message === "LOGGED") {
       } else {

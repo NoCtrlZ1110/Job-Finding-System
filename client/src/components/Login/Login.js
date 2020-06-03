@@ -5,6 +5,9 @@ import { TweenMax, Power2, Expo } from "gsap/TweenMax";
 import Quad from "eases";
 import "./Login.scss";
 import HTTP from "../../services/request";
+import history from "../../services/history";
+
+import axios from "axios";
 export class Login extends Component {
   constructor(props) {
     super(props);
@@ -23,17 +26,12 @@ export class Login extends Component {
 
   handleSubmit(event) {
     let data = this.state;
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    };
-    fetch(HTTP.SERVER + "employee/login", requestOptions)
-      .then((response) => response.json())
+    axios
+      .post(HTTP.SERVER + "employee/login", data, { withCredentials: true })
+      .then((response) => response.data)
       .then((message) => {
         alert(message);
+        if (message === "Đăng nhập thành công!") history.push("/profile");
       });
 
     event.preventDefault();

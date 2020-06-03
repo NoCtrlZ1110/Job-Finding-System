@@ -23,7 +23,8 @@ app.get("/ping", function (req, res) {
 });
 
 // view engine setup
-app.use(cors());
+// app.use(cors());
+
 app.use(express.json());
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
@@ -46,7 +47,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 app.use(function (req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
@@ -58,10 +59,17 @@ app.use(function (req, res, next) {
   res.setHeader("Access-Control-Allow-Credentials", true);
   next();
 });
+app.use(
+  cors({
+    origin: ["*"],
+    methods: ["GET", "POST", "OPTIONS", "PUT", "PATCH", "DELETE"],
+    credentials: true, // enable set cookie
+  })
+);
 
 // employee
 
-app.get("/status", function (req, res) {
+app.all("/status", function (req, res) {
   if (req.session.status) {
     res.json("LOGGED");
   } else {
