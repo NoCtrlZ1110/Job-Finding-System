@@ -11,11 +11,9 @@ export const List: React.FC<{ routes: any }> = ({ routes }) => {
       <div className="container ">
         <div className="row">
           <div className="col-md-12 mb-4 white-text text-center">
-            <h1 className="font-weight-bold">
-              <strong>THỐNG KÊ</strong>
-            </h1>
+            <h1 className="font-weight-bold">THỐNG KÊ</h1>
             <h3 className="text-uppercase m-3 blockqoute ">
-              <strong>Thống kê nhà tuyển dụng và người tìm việc hiện có</strong>
+              Thống kê nhà tuyển dụng và người tìm việc hiện có
             </h3>
             <div className="my-5">
               <Container>

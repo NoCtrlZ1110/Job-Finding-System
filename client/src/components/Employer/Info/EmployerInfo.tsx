@@ -38,9 +38,7 @@ export const EmployerInfo: React.FC = () => {
   return (
     <div className="text-center">
       <div className="container" style={{ maxWidth: "50em" }}>
-        <h1 className="my-5">
-          <strong>THÔNG TIN NHÀ TUYỂN DỤNG</strong>
-        </h1>
+        <h1 className="my-5">THÔNG TIN NHÀ TUYỂN DỤNG</h1>
         <Card bg="info" text="white">
           <Card.Body>
             <Card.Title>

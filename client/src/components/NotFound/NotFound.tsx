@@ -20,9 +20,7 @@ export const NotFound: React.FC = () => {
       <br />
       <br />
       <h1>
-        <strong>
-          404 NOT FOUND <FontAwesomeIcon icon={faCoffee}></FontAwesomeIcon>
-        </strong>
+        404 NOT FOUND <FontAwesomeIcon icon={faCoffee}></FontAwesomeIcon>
       </h1>
       <h2>Bạn sẽ được chuyển về trang chủ sau {count} giây!</h2>
     </div>

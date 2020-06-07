@@ -115,11 +115,9 @@ export const FindEmployee: React.FC = () => {
     <>
       <Card style={{ color: "#2665b8" }}>
         <Card.Header>
-          <strong>
-            <h5>
-              <b>TÌM KIẾM ỨNG VIÊN</b>
-            </h5>
-          </strong>
+          <h5>
+            <b>TÌM KIẾM ỨNG VIÊN</b>
+          </h5>
         </Card.Header>
         <Card.Body style={{ textAlign: "left" }}>
           <Form onSubmit={handleSubmit}>
@@ -216,7 +214,13 @@ export const FindEmployee: React.FC = () => {
         </Card.Body>
       </Card>
 
-      <Modal show={show} onHide={handleClose} centered size="lg" id="resultModal">
+      <Modal
+        show={show}
+        onHide={handleClose}
+        centered
+        size="lg"
+        id="resultModal"
+      >
         <Modal.Header closeButton>
           <Modal.Title>Kết quả tìm kiếm</Modal.Title>
         </Modal.Header>

@@ -6,16 +6,19 @@ export class Home extends React.Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12 mb-4 white-text text-center">
-              <h1 className="font-weight-bold mb-0 pt-md-5 pt-5 mt-5">
-                <strong>FINDING JOB SYSTEM</strong>
+              <h1 className="display-3 text-white" style={{ color: "#ffffff" }}>
+                FINDING JOB SYSTEM
               </h1>
-              <h3 className="text-uppercase m-3 blockqoute ">
-                <strong>Hệ Thống Tìm Việc Trực Tuyến</strong>
+              <h3
+                className="lead text-uppercase m-3 blockqoute "
+                style={{ color: "#ffffff" }}
+              >
+                Hệ Thống Tìm Việc Trực Tuyến
               </h3>
               <br />
               <h2>
                 <a href="/select/" className="btn btn-lg btn-success mt-5">
-                  <strong>Bắt Đầu</strong>
+                  <>Bắt Đầu</>
                 </a>
               </h2>
             </div>

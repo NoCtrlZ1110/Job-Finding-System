@@ -40,9 +40,7 @@ export const EmployeeInfo: React.FC = () => {
   return (
     <div className="text-center">
       <div className="container" style={{ maxWidth: "50em" }}>
-        <h1 className="my-5">
-          <strong>THÔNG TIN ỨNG VIÊN</strong>
-        </h1>
+        <h1 className="my-5">THÔNG TIN ỨNG VIÊN</h1>
         <Card bg="info" text="white">
           <Card.Body>
             <Card.Title>

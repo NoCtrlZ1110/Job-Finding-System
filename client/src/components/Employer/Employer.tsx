@@ -16,7 +16,7 @@ export const Employer: React.FC<{ routes: any }> = ({ routes }) => {
           size="lg"
           style={{ minWidth: "27em" }}
         >
-          <b>NHÀ TUYỂN DỤNG</b>
+          NHÀ TUYỂN DỤNG
         </Button>
       </div>
       <Link to="find" className="btn btn-success m-3">

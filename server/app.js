@@ -61,7 +61,9 @@ app.use(function (req, res, next) {
 });
 app.use(
   cors({
-    origin: ["*"],
+    origin: function (origin, callback) {
+      return callback(null, true);
+    },
     methods: ["GET", "POST", "OPTIONS", "PUT", "PATCH", "DELETE"],
     credentials: true, // enable set cookie
   })

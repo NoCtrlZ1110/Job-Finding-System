@@ -83,25 +83,21 @@ export const EmployeeList: React.FC = () => {
     <>
       <Card className="list" style={{ color: "#2665b8" }}>
         <Card.Header>
-          <strong>
-            <h5>
-              <Row>
-                <Col>
-                  <div className="mt-3">
-                    <strong>THỐNG KÊ TẤT CẢ CÁC ỨNG VIÊN</strong>
-                  </div>
-                </Col>
-                <Col style={{ textAlign: "right" }}>
-                  <Button disabled className="btn btn-info mx-2 mt-2">
-                    Người tìm việc
-                  </Button>
-                  <Link to="employer" className="btn btn-info mx-2 mt-2">
-                    Nhà tuyển dụng
-                  </Link>
-                </Col>
-              </Row>
-            </h5>
-          </strong>
+          <h5>
+            <Row>
+              <Col>
+                <div className="mt-3">THỐNG KÊ TẤT CẢ CÁC ỨNG VIÊN</div>
+              </Col>
+              <Col style={{ textAlign: "right" }}>
+                <Button disabled className="btn btn-info mx-2 mt-2">
+                  Người tìm việc
+                </Button>
+                <Link to="employer" className="btn btn-info mx-2 mt-2">
+                  Nhà tuyển dụng
+                </Link>
+              </Col>
+            </Row>
+          </h5>
         </Card.Header>
         <Card.Body>
           <BootstrapTable

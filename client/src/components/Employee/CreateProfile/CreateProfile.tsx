@@ -57,11 +57,9 @@ export const CreateProfile: React.FC = () => {
           <Col>
             <Card style={{ color: "#2665b8" }}>
               <Card.Header>
-                <strong>
-                  <h5>
-                    <b>TẠO HỒ SƠ VIỆC LÀM</b>
-                  </h5>
-                </strong>
+                <h5>
+                  <b>TẠO HỒ SƠ VIỆC LÀM</b>
+                </h5>
               </Card.Header>
               <Card.Body style={{ textAlign: "left" }}>
                 <Form onSubmit={handleSubmit}>
