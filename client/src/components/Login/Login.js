@@ -6,8 +6,9 @@ import Quad from "eases";
 import "./Login.scss";
 import HTTP from "../../services/request";
 import history from "../../services/history";
-
 import axios from "axios";
+import { AuthContext } from "../../services/store";
+
 export class Login extends Component {
   constructor(props) {
     super(props);
@@ -31,24 +32,25 @@ export class Login extends Component {
       .then((response) => response.data)
       .then((message) => {
         alert(message);
-        if (message === "Đăng nhập thành công!") history.push("/profile");
+        if (message === "Đăng nhập thành công!") {
+          window.location.href = "/profile";
+        }
       });
 
     event.preventDefault();
   }
 
-  // handleEmailChange(e) {
-  //   console.log({ email: e.target.value });
-  // }
-  // handlePasswordChange(e) {
-  //   this.setState({ password: e.target.value });
-  // }
-
-  // handleLogin() {
-  //   console.log("EMail: " + this.state.email);
-  //   console.log("Password: " + this.state.password);
-  // }
   componentDidMount() {
+    axios
+      .get(HTTP.SERVER + "status", { withCredentials: true })
+      .then((response) => response.data)
+      .then((message) => {
+        if (message === "LOGGED") {
+          history.push("/profile");
+        } else {
+        }
+      });
+
     var emailLabel = document.querySelector("#loginEmailLabel"),
       email = document.querySelector("#loginEmail"),
       //   passwordLabel = document.querySelector("#loginPasswordLabel"),

@@ -1,17 +1,16 @@
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
 
-
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -25,7 +24,7 @@ body {
 }
 
 #divContent {
-  min-height: 700px;
+  min-height: 750px;
   height: auto !important;
   /*Cause footer to stick to bottom in IE 6*/
   height: 100%;
@@ -38,4 +37,15 @@ body {
 #divPush {
   height: 100px;
   /*Push must be same height as Footer */
+}
+
+#shadow {
+  text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9,
+    0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2),
+}
+
+#shadow2 {
+  text-shadow: 2px 2px 4px #2895c7;
+
 }

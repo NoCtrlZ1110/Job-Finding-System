@@ -33,11 +33,11 @@ import {
   InputGroup,
   Container,
   Row,
-  Col
+  Col,
 } from "reactstrap";
 
 // core components
-import DemoNavbar from "components/Navbars/DemoNavbar.js";
+import NavBar from "components/Navbars/NavBar.js";
 import CardsFooter from "components/Footers/CardsFooter.js";
 
 // index page sections
@@ -53,7 +53,7 @@ class Landing extends React.Component {
   render() {
     return (
       <>
-        <DemoNavbar />
+        <NavBar />
         <main ref="main">
           <div className="position-relative">
             {/* shape Hero */}
@@ -163,7 +163,7 @@ class Landing extends React.Component {
                             className="mt-4"
                             color="primary"
                             href="#pablo"
-                            onClick={e => e.preventDefault()}
+                            onClick={(e) => e.preventDefault()}
                           >
                             Learn more
                           </Button>
@@ -199,7 +199,7 @@ class Landing extends React.Component {
                             className="mt-4"
                             color="success"
                             href="#pablo"
-                            onClick={e => e.preventDefault()}
+                            onClick={(e) => e.preventDefault()}
                           >
                             Learn more
                           </Button>
@@ -235,7 +235,7 @@ class Landing extends React.Component {
                             className="mt-4"
                             color="warning"
                             href="#pablo"
-                            onClick={e => e.preventDefault()}
+                            onClick={(e) => e.preventDefault()}
                           >
                             Learn more
                           </Button>
@@ -386,7 +386,7 @@ class Landing extends React.Component {
                     <a
                       className="font-weight-bold text-warning mt-5"
                       href="#pablo"
-                      onClick={e => e.preventDefault()}
+                      onClick={(e) => e.preventDefault()}
                     >
                       A beautiful UI Kit for impactful websites
                     </a>
@@ -443,7 +443,7 @@ class Landing extends React.Component {
                           <a
                             className="text-success"
                             href="#pablo"
-                            onClick={e => e.preventDefault()}
+                            onClick={(e) => e.preventDefault()}
                           >
                             Learn more
                           </a>
@@ -471,7 +471,7 @@ class Landing extends React.Component {
                           <a
                             className="text-warning"
                             href="#pablo"
-                            onClick={e => e.preventDefault()}
+                            onClick={(e) => e.preventDefault()}
                           >
                             Learn more
                           </a>
@@ -530,7 +530,7 @@ class Landing extends React.Component {
                           className="btn-icon-only rounded-circle"
                           color="warning"
                           href="#pablo"
-                          onClick={e => e.preventDefault()}
+                          onClick={(e) => e.preventDefault()}
                         >
                           <i className="fa fa-twitter" />
                         </Button>
@@ -538,7 +538,7 @@ class Landing extends React.Component {
                           className="btn-icon-only rounded-circle ml-1"
                           color="warning"
                           href="#pablo"
-                          onClick={e => e.preventDefault()}
+                          onClick={(e) => e.preventDefault()}
                         >
                           <i className="fa fa-facebook" />
                         </Button>
@@ -546,7 +546,7 @@ class Landing extends React.Component {
                           className="btn-icon-only rounded-circle ml-1"
                           color="warning"
                           href="#pablo"
-                          onClick={e => e.preventDefault()}
+                          onClick={(e) => e.preventDefault()}
                         >
                           <i className="fa fa-dribbble" />
                         </Button>
@@ -574,7 +574,7 @@ class Landing extends React.Component {
                           className="btn-icon-only rounded-circle"
                           color="primary"
                           href="#pablo"
-                          onClick={e => e.preventDefault()}
+                          onClick={(e) => e.preventDefault()}
                         >
                           <i className="fa fa-twitter" />
                         </Button>
@@ -582,7 +582,7 @@ class Landing extends React.Component {
                           className="btn-icon-only rounded-circle ml-1"
                           color="primary"
                           href="#pablo"
-                          onClick={e => e.preventDefault()}
+                          onClick={(e) => e.preventDefault()}
                         >
                           <i className="fa fa-facebook" />
                         </Button>
@@ -590,7 +590,7 @@ class Landing extends React.Component {
                           className="btn-icon-only rounded-circle ml-1"
                           color="primary"
                           href="#pablo"
-                          onClick={e => e.preventDefault()}
+                          onClick={(e) => e.preventDefault()}
                         >
                           <i className="fa fa-dribbble" />
                         </Button>
@@ -616,7 +616,7 @@ class Landing extends React.Component {
                           className="btn-icon-only rounded-circle"
                           color="info"
                           href="#pablo"
-                          onClick={e => e.preventDefault()}
+                          onClick={(e) => e.preventDefault()}
                         >
                           <i className="fa fa-twitter" />
                         </Button>
@@ -624,7 +624,7 @@ class Landing extends React.Component {
                           className="btn-icon-only rounded-circle ml-1"
                           color="info"
                           href="#pablo"
-                          onClick={e => e.preventDefault()}
+                          onClick={(e) => e.preventDefault()}
                         >
                           <i className="fa fa-facebook" />
                         </Button>
@@ -632,7 +632,7 @@ class Landing extends React.Component {
                           className="btn-icon-only rounded-circle ml-1"
                           color="info"
                           href="#pablo"
-                          onClick={e => e.preventDefault()}
+                          onClick={(e) => e.preventDefault()}
                         >
                           <i className="fa fa-dribbble" />
                         </Button>
@@ -658,7 +658,7 @@ class Landing extends React.Component {
                           className="btn-icon-only rounded-circle"
                           color="success"
                           href="#pablo"
-                          onClick={e => e.preventDefault()}
+                          onClick={(e) => e.preventDefault()}
                         >
                           <i className="fa fa-twitter" />
                         </Button>
@@ -666,7 +666,7 @@ class Landing extends React.Component {
                           className="btn-icon-only rounded-circle ml-1"
                           color="success"
                           href="#pablo"
-                          onClick={e => e.preventDefault()}
+                          onClick={(e) => e.preventDefault()}
                         >
                           <i className="fa fa-facebook" />
                         </Button>
@@ -674,7 +674,7 @@ class Landing extends React.Component {
                           className="btn-icon-only rounded-circle ml-1"
                           color="success"
                           href="#pablo"
-                          onClick={e => e.preventDefault()}
+                          onClick={(e) => e.preventDefault()}
                         >
                           <i className="fa fa-dribbble" />
                         </Button>
@@ -791,7 +791,7 @@ class Landing extends React.Component {
                       </p>
                       <FormGroup
                         className={classnames("mt-5", {
-                          focused: this.state.nameFocused
+                          focused: this.state.nameFocused,
                         })}
                       >
                         <InputGroup className="input-group-alternative">
@@ -803,14 +803,18 @@ class Landing extends React.Component {
                           <Input
                             placeholder="Your name"
                             type="text"
-                            onFocus={e => this.setState({ nameFocused: true })}
-                            onBlur={e => this.setState({ nameFocused: false })}
+                            onFocus={(e) =>
+                              this.setState({ nameFocused: true })
+                            }
+                            onBlur={(e) =>
+                              this.setState({ nameFocused: false })
+                            }
                           />
                         </InputGroup>
                       </FormGroup>
                       <FormGroup
                         className={classnames({
-                          focused: this.state.emailFocused
+                          focused: this.state.emailFocused,
                         })}
                       >
                         <InputGroup className="input-group-alternative">
@@ -822,8 +826,12 @@ class Landing extends React.Component {
                           <Input
                             placeholder="Email address"
                             type="email"
-                            onFocus={e => this.setState({ emailFocused: true })}
-                            onBlur={e => this.setState({ emailFocused: false })}
+                            onFocus={(e) =>
+                              this.setState({ emailFocused: true })
+                            }
+                            onBlur={(e) =>
+                              this.setState({ emailFocused: false })
+                            }
                           />
                         </InputGroup>
                       </FormGroup>

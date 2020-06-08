@@ -1,3 +1,4 @@
+/* eslint-disable no-multi-str */
 var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
@@ -116,7 +117,7 @@ app.post("/employee/register", function (req, res) {
       [username, password],
       function (error) {
         if (error) {
-          res.json("fall to register");
+          res.json("fail to register");
         } else {
           res.json("register done. please return to login");
         }

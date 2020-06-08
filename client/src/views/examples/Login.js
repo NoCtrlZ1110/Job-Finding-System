@@ -31,11 +31,11 @@ import {
   InputGroup,
   Container,
   Row,
-  Col
+  Col,
 } from "reactstrap";
 
 // core components
-import DemoNavbar from "components/Navbars/DemoNavbar.js";
+import NavBar from "components/Navbars/NavBar.js";
 import SimpleFooter from "components/Footers/SimpleFooter.js";
 
 class Login extends React.Component {
@@ -47,7 +47,7 @@ class Login extends React.Component {
   render() {
     return (
       <>
-        <DemoNavbar />
+        <NavBar />
         <main ref="main">
           <section className="section section-shaped section-lg">
             <div className="shape shape-style-1 bg-gradient-default">
@@ -73,7 +73,7 @@ class Login extends React.Component {
                           className="btn-neutral btn-icon"
                           color="default"
                           href="#pablo"
-                          onClick={e => e.preventDefault()}
+                          onClick={(e) => e.preventDefault()}
                         >
                           <span className="btn-inner--icon mr-1">
                             <img
@@ -87,7 +87,7 @@ class Login extends React.Component {
                           className="btn-neutral btn-icon ml-1"
                           color="default"
                           href="#pablo"
-                          onClick={e => e.preventDefault()}
+                          onClick={(e) => e.preventDefault()}
                         >
                           <span className="btn-inner--icon mr-1">
                             <img
@@ -158,7 +158,7 @@ class Login extends React.Component {
                       <a
                         className="text-light"
                         href="#pablo"
-                        onClick={e => e.preventDefault()}
+                        onClick={(e) => e.preventDefault()}
                       >
                         <small>Forgot password?</small>
                       </a>
@@ -167,7 +167,7 @@ class Login extends React.Component {
                       <a
                         className="text-light"
                         href="#pablo"
-                        onClick={e => e.preventDefault()}
+                        onClick={(e) => e.preventDefault()}
                       >
                         <small>Create new account</small>
                       </a>

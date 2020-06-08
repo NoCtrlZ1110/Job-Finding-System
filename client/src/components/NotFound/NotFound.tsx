@@ -19,10 +19,12 @@ export const NotFound: React.FC = () => {
     <div className="text-center">
       <br />
       <br />
-      <h1>
+      <h1 style={{ color: "#ffffff" }}>
         404 NOT FOUND <FontAwesomeIcon icon={faCoffee}></FontAwesomeIcon>
       </h1>
-      <h2>Bạn sẽ được chuyển về trang chủ sau {count} giây!</h2>
+      <h2 style={{ color: "#ffffff" }}>
+        Bạn sẽ được chuyển về trang chủ sau {count} giây!
+      </h2>
     </div>
   );
 };
