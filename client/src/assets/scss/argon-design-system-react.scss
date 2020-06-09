@@ -17,13 +17,13 @@
 */
 
 // Bootstrap Functions
-@import "../../../node_modules/bootstrap/scss/functions";
+@import "../bootstrap/scss/functions";
 
 // Theme Variables
 @import "argon-design-system/variables";
 
 // Bootstrap Core
-@import "../../../node_modules/bootstrap/scss/bootstrap";
+@import "../bootstrap/scss/bootstrap";
 
 // Theme Core
 @import "argon-design-system/theme";
