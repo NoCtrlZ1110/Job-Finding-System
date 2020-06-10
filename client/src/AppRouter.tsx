@@ -16,8 +16,9 @@ import { EmployerList } from "./components/List/EmployerList/EmployerList";
 import { EmployeeInfo } from "./components/Employee/Info/EmployeeInfo";
 import { EmployerInfo } from "./components/Employer/Info/EmployerInfo";
 import Login from "./components/Login/Login";
-// import { Profile } from "./components/Profile/Profile";
-import Profile from "./views/examples/Profile";
+import Register from "./components/Register/Register";
+import Profile from "./components/Profile/Profile";
+// import Profile from "./views/examples/Profile";
 
 const routes = [
   {
@@ -33,6 +34,11 @@ const routes = [
   {
     path: "/login",
     component: Login,
+    exact: true,
+  },
+  {
+    path: "/register",
+    component: Register,
     exact: true,
   },
   {

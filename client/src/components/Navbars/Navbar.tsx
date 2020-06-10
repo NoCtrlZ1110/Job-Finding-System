@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useContext } from "react";
 import Headroom from "headroom.js";
 import { BrowserRouter } from "react-router-dom";
 import logo from "../../img/logo_.png";
@@ -40,12 +39,22 @@ export const NavBar: React.FC<{}> = () => {
       .then((response) => response.data)
       .then((message) => {
         setLogged(message);
+        if (message === "LOGGED") {
+          axios
+            .get(HTTP.SERVER + "currentAccount", { withCredentials: true })
+            .then((response) => response.data)
+            .then((profile) => {
+              setUser(profile);
+              console.log(profile);
+            });
+        }
       });
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLogged]);
 
   let handleLogout = () => {
     axios
-      .get(HTTP.SERVER + "employee/logout", { withCredentials: true })
+      .get(HTTP.SERVER + "logout", { withCredentials: true })
       .then((response) => response.data)
       .then((message) => {
         alert(message);
@@ -179,28 +188,16 @@ export const NavBar: React.FC<{}> = () => {
                       href="/profile"
                       id="tooltip112445449"
                     >
-                      <i className="fa fa-github" />
-                      <span className="nav-link-inner--text d-lg-none ml-2">
-                        Github
-                      </span>
+                      <i className="fa fa-github mr-2" />
+                      {user ? <span>{user.name}</span> : ""}
+                      <span className="nav-link-inner--text d-lg-none ml-2"></span>
                     </NavLink>
                     <UncontrolledTooltip delay={0} target="tooltip112445449">
                       Profile
                     </UncontrolledTooltip>
                   </NavItem>
                   <NavItem className="d-none d-lg-block ml-lg-4">
-                    {isLogged === "NOTLOGGED" ? (
-                      <Button
-                        className="btn-neutral btn-icon"
-                        color="default"
-                        href="/login"
-                      >
-                        <span className="btn-inner--icon">
-                          <i className="fa fa-sign-in mr-2" />
-                        </span>
-                        <span className="nav-link-inner--text ml-1">Login</span>
-                      </Button>
-                    ) : (
+                    {isLogged === "LOGGED" ? (
                       <Button
                         className="btn-neutral btn-icon"
                         color="default"
@@ -212,6 +209,17 @@ export const NavBar: React.FC<{}> = () => {
                         <span className="nav-link-inner--text ml-1">
                           Logout
                         </span>
+                      </Button>
+                    ) : (
+                      <Button
+                        className="btn-neutral btn-icon"
+                        color="default"
+                        href="/login"
+                      >
+                        <span className="btn-inner--icon">
+                          <i className="fa fa-sign-in mr-2" />
+                        </span>
+                        <span className="nav-link-inner--text ml-1">Login</span>
                       </Button>
                     )}
                   </NavItem>

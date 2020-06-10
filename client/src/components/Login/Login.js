@@ -7,15 +7,18 @@ import "./Login.scss";
 import HTTP from "../../services/request";
 import history from "../../services/history";
 import axios from "axios";
-import { AuthContext } from "../../services/store";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 
 export class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { username: "", password: "" };
+    this.state = { username: "", password: "", type: "" };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.handleRadioChange = this.handleRadioChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleUsernameChange(e) {
@@ -24,11 +27,15 @@ export class Login extends Component {
   handlePasswordChange(e) {
     this.setState({ password: e.target.value });
   }
-
+  handleRadioChange(e) {
+    this.setState({ type: e.target.value });
+  }
   handleSubmit(event) {
     let data = this.state;
     axios
-      .post(HTTP.SERVER + "employee/login", data, { withCredentials: true })
+      .post(HTTP.SERVER + this.state.type + "/login", data, {
+        withCredentials: true,
+      })
       .then((response) => response.data)
       .then((message) => {
         alert(message);
@@ -1053,10 +1060,9 @@ export class Login extends Component {
               </svg>
             </div>
           </div>
-
           <div className="inputGroup inputGroup1">
             <label htmlFor="loginEmail" id="loginEmailLabel">
-              Username
+              Tài khoản
             </label>
             <input
               type="username"
@@ -1065,11 +1071,11 @@ export class Login extends Component {
               onChange={this.handleUsernameChange}
               value={this.state.username}
             />
-            <p className="helper helper1">username1110</p>
+            <p className="helper helper1">username</p>
           </div>
           <div className="inputGroup inputGroup2">
             <label htmlFor="loginPassword" id="loginPasswordLabel">
-              Password
+              Mật khẩu
             </label>
             <input
               type="password"
@@ -1083,8 +1089,41 @@ export class Login extends Component {
               <div className="indicator"></div>
             </label>
           </div>
+          <fieldset>
+            <Form.Group as={Row}>
+              <Form.Label as="legend" column sm={4}>
+                Bạn là:
+              </Form.Label>
+
+              <Col sm={8}>
+                <Form.Check
+                  required
+                  type="radio"
+                  label="Người tìm việc"
+                  name="type"
+                  value="employee"
+                  id="employeeRadio"
+                  onChange={this.handleRadioChange}
+                />
+
+                <Form.Check
+                  required
+                  type="radio"
+                  label="Nhà tuyển dụng"
+                  name="type"
+                  value="employer"
+                  id="employerRadio"
+                  onChange={this.handleRadioChange}
+                />
+              </Col>
+            </Form.Group>
+          </fieldset>
           <div>
-            <button type="submit">Log in</button>
+            <button type="submit">Đăng Nhập</button>
+          </div>
+          <div className="d-flex justify-content-between mt-3">
+            <span>Chưa có tài khoản?</span>
+            <a href="/register">Đăng ký ngay!</a>
           </div>
         </form>
       </div>

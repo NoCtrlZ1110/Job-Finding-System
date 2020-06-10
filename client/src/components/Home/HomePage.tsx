@@ -1,17 +1,13 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../services/store";
 export const Home = () => {
-  const { user, setUser }: any = useContext(AuthContext);
+  const { user }: any = useContext(AuthContext);
 
   return (
     <div>
       <div className="container">
         <div className="row">
           <div className="col-md-12 mb-4 white-text text-center">
-            <link
-              href="https://fonts.googleapis.com/css2?family=Bungee&family=Pacifico&display=swap"
-              rel="stylesheet"
-            />
             <h1
               className="display-3 text-white mt-5"
               id="shadow"
@@ -33,7 +29,7 @@ export const Home = () => {
                 fontSize: 35,
               }}
             >
-              Hệ Thống Tìm Việc Trực Tuyến
+              Hệ Thống Tìm Việc Trực Tuyến!
             </h3>
             <br />
             <h2>

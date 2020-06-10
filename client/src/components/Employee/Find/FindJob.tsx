@@ -11,6 +11,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import HTTP from "../../../services/request";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
+import axios from "axios";
 
 export const FindJob: React.FC = () => {
   const [show, setShow] = useState(false);
@@ -64,7 +65,7 @@ export const FindJob: React.FC = () => {
       text: "Ghi chú",
     },
     {
-      dataField: "employer_id",
+      dataField: "employerJobId",
       text: "Action",
       formatter: (cellContent: any, _row: any) => {
         let link = `/employer/info/${cellContent}`;
@@ -90,15 +91,9 @@ export const FindJob: React.FC = () => {
 
     console.log(data);
 
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    };
-    fetch(HTTP.SERVER + "employer/find", requestOptions)
-      .then((response) => response.json())
+    axios
+      .get(HTTP.SERVER + "employee/find", { withCredentials: true })
+      .then((response) => response.data)
       .then((data) => {
         setData(data);
         handleShow();
