@@ -3,7 +3,7 @@
 import React, { Component } from "react";
 import { TweenMax, Power2, Expo } from "gsap/TweenMax";
 import Quad from "eases";
-import "./Login.scss";
+import "./Register.scss";
 import HTTP from "../../services/request";
 import history from "../../services/history";
 import axios from "axios";
@@ -11,14 +11,15 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
-export class Login extends Component {
+export class Register extends Component {
   constructor(props) {
     super(props);
-    this.state = { username: "", password: "", type: "" };
+    this.state = { username: "", password: "" };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleRadioChange = this.handleRadioChange.bind(this);
+
     this.handleSubmit = this.handleSubmit.bind(this);
   }
   handleUsernameChange(e) {
@@ -30,17 +31,18 @@ export class Login extends Component {
   handleRadioChange(e) {
     this.setState({ type: e.target.value });
   }
+
   handleSubmit(event) {
     let data = this.state;
     axios
-      .post(HTTP.SERVER + this.state.type + "/login", data, {
+      .post(HTTP.SERVER + this.state.type + "/register", data, {
         withCredentials: true,
       })
       .then((response) => response.data)
       .then((message) => {
         alert(message);
-        if (message === "Đăng nhập thành công!") {
-          window.location.href = "/profile";
+        if (message === "Đăng ký thành công!\nĐăng nhập ngay.") {
+          window.location.href = "/login";
         }
       });
 
@@ -704,6 +706,16 @@ export class Login extends Component {
   render() {
     return (
       <div className="App">
+        <h1
+          className="font-weight-bold text-center"
+          style={{
+            color: "#ffffff",
+            fontSize: 30,
+            fontFamily: "Bungee",
+          }}
+        >
+          Tạo Tài Khoản Mới
+        </h1>
         <form className="login" onSubmit={this.handleSubmit}>
           <div className="svgContainer">
             <div>
@@ -1094,7 +1106,6 @@ export class Login extends Component {
               <Form.Label as="legend" column sm={4}>
                 Bạn là:
               </Form.Label>
-
               <Col sm={8}>
                 <Form.Check
                   required
@@ -1105,7 +1116,6 @@ export class Login extends Component {
                   id="employeeRadio"
                   onChange={this.handleRadioChange}
                 />
-
                 <Form.Check
                   required
                   type="radio"
@@ -1119,11 +1129,12 @@ export class Login extends Component {
             </Form.Group>
           </fieldset>
           <div>
-            <button type="submit">Đăng Nhập</button>
+            <button type="submit">Đăng Ký</button>
           </div>
+
           <div className="d-flex justify-content-between mt-3">
-            <span>Chưa có tài khoản?</span>
-            <a href="/register">Đăng ký ngay!</a>
+            <span>Đã có tài khoản?</span>
+            <a href="/login">Đăng nhập ngay!</a>
           </div>
         </form>
       </div>
@@ -1131,4 +1142,4 @@ export class Login extends Component {
   }
 }
 
-export default Login;
+export default Register;

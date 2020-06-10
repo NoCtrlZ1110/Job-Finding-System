@@ -78,6 +78,12 @@ app.all("/status", function (req, res) {
   }
 });
 
+app.all("/currentAccount", (req, res) => {
+  if (req.session.currentAccount) {
+    res.send(req.session.currentAccount);
+  } else res.send("NOTLOGGED");
+});
+
 // truy cập /employee cho tự động nhảy đến employee/login
 // login
 app.all("/employee/login", function (req, res) {
@@ -86,11 +92,18 @@ app.all("/employee/login", function (req, res) {
   var password = data.password;
   if (username && password) {
     mysql.query(
-      "SELECT employeeId FROM employeeaccount WHERE username = ? AND password = ?",
+      /* "SELECT employeeId FROM employeeaccount WHERE username = ? AND password = ?", */
+      `SELECT e.* FROM employeeaccount ea
+      JOIN employee e ON ea.employeeId = e.employeeId
+      WHERE ea.username = ? AND ea.password = ?
+      ;`,
       [username, password],
       function (error, response) {
         if (response.length > 0) {
+          console.log(response);
           req.session.status = "LOGGED";
+          req.session.currentAccount = response[0];
+          req.session.currentAccount.type = "employee";
           req.session.employeeId = response[0].employeeId;
           res.json("Đăng nhập thành công!");
         } else {
@@ -117,9 +130,9 @@ app.post("/employee/register", function (req, res) {
       [username, password],
       function (error) {
         if (error) {
-          res.json("fail to register");
+          res.json("Đăng ký thất bại!\nHãy thử lại.");
         } else {
-          res.json("register done. please return to login");
+          res.json("Đăng ký thành công!\nĐăng nhập ngay.");
         }
         res.end();
       }
@@ -312,6 +325,12 @@ app.post("/employee/quit", function (req, res) {
   } else req.json("no account");
 });
 // logout
+app.all("/logout", function (req, res) {
+  req.session.destroy();
+  res.send("Logged out!");
+  // return /home
+});
+
 app.all("/employee/logout", function (req, res) {
   req.session.destroy();
   res.send("Logged out!");
@@ -327,13 +346,20 @@ app.all("/employer/login", function (req, res) {
   var password = data.password;
   if (username && password) {
     mysql.query(
-      "SELECT employerId FROM employeraccount WHERE username = ? AND password = ?",
+      `SELECT e.* FROM employeraccount ea
+      JOIN employer e ON ea.employerId = e.employerId
+      WHERE ea.username = ? AND ea.password = ?
+      ;`,
       [username, password],
       function (error, response) {
+        console.log(response);
+
         if (response.length > 0) {
           req.session.status = "LOGGED";
+          req.session.currentAccount = response[0];
+          req.session.currentAccount.type = "employer";
           req.session.employerId = response[0].employerId;
-          res.json("ok");
+          res.json("Đăng nhập thành công!");
         } else {
           res.json("Incorrect account and/or Password!");
         }
@@ -358,9 +384,9 @@ app.post("/employer/register", function (req, res) {
       [username, password],
       function (error) {
         if (error) {
-          res.json("fall to register");
+          res.json("Đăng ký thất bại!\nPlease try again!");
         } else {
-          res.json("register done. please return to login");
+          res.json("Đăng ký thành công!\nĐăng nhập ngay.");
         }
         res.end();
       }

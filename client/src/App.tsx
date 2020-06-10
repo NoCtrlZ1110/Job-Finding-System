@@ -8,7 +8,10 @@ function App() {
   return (
     <>
       <Navbar />
-
+      <link
+        href="https://fonts.googleapis.com/css2?family=Bungee&family=Pacifico&display=swap"
+        rel="stylesheet"
+      />
       <section
         className="section-profile-cover section-shaped my-0"
         style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0 }}

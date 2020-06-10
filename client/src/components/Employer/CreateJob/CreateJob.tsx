@@ -220,10 +220,8 @@ export const CreateJob: React.FC = () => {
                 type="submit"
                 // onClick={handleShow}
               >
-                <b>
-                  Tạo Hồ Sơ
-                  <FontAwesomeIcon className="ml-2" icon={faPlusCircle} />
-                </b>
+                Tạo Hồ Sơ
+                <FontAwesomeIcon className="ml-2" icon={faPlusCircle} />
               </Button>
             </div>
             <Row>

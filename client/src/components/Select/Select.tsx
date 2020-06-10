@@ -8,14 +8,22 @@ export const Select: React.FC<any> = ({ routes }) => {
       <div className="container">
         <div className="row">
           <div className="col  text-center mx-4 mt-5">
-            <h1 className="font-weight-bold" style={{ color: "#ffffff" }}>
-              Bạn là ai?
+            <h1
+              className="font-weight-bold"
+              style={{
+                color: "#ffffff",
+                fontSize: 40,
+                fontFamily: "Bungee",
+              }}
+            >
+              WHO ARE YOU?
+              <br />
               <br />
             </h1>
             <br />
             <Container className="container-lg">
               <Row>
-                <Col className="mb-5 mb-md-0" md="6">
+                <Col className="mb-5 mb-md-0" md="5">
                   <Card className="card-lift--hover shadow border-0">
                     <Link to="/employer/">
                       {/*  <div className="card-body">
@@ -38,7 +46,9 @@ export const Select: React.FC<any> = ({ routes }) => {
                     </Link>
                   </Card>
                 </Col>
-                <Col className="mb-5 mb-lg-0" md="6">
+                {/* <Col md={2} /> */}
+                <Col />
+                <Col className="mb-5 mb-lg-0 " md="5">
                   <Card className="card-lift--hover shadow border-0">
                     <Link to="/employee/">
                       {/* <div className="card-body">
