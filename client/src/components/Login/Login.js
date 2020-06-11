@@ -10,6 +10,8 @@ import axios from "axios";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Toast from "react-bootstrap/Toast";
+import { toast } from "react-toastify";
 
 export class Login extends Component {
   constructor(props) {
@@ -38,9 +40,29 @@ export class Login extends Component {
       })
       .then((response) => response.data)
       .then((message) => {
-        alert(message);
         if (message === "Đăng nhập thành công!") {
-          window.location.href = "/profile";
+          toast.success("   😎 Đăng nhập thành công!", {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          setInterval(() => {
+            window.location.href = "/profile";
+          }, 1700);
+        } else {
+          toast.error("⚠ Sai tài khoản/ mật khẩu!", {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
         }
       });
 
@@ -55,6 +77,13 @@ export class Login extends Component {
         if (message === "LOGGED") {
           history.push("/profile");
         } else {
+          toast.info(
+            " ⚡ Tạo tài khoản mới hoặc sử dụng tài khoản demo có sẵn phía trên!",
+            {
+              position: "bottom-right",
+              autoClose: 7000,
+            }
+          );
         }
       });
 
@@ -704,6 +733,68 @@ export class Login extends Component {
   render() {
     return (
       <div className="App">
+        <div
+          aria-live="polite"
+          aria-atomic="true"
+          style={{
+            position: "relative",
+            minHeight: "200px",
+          }}
+        >
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              right: 100,
+            }}
+          >
+            <Toast className="mt-5">
+              <Toast.Header>
+                <img
+                  src="holder.js/20x20?text=%20"
+                  className="rounded mr-2"
+                  alt=""
+                />
+                <strong className="mr-auto">Tài khoản demo</strong>
+                <small>just now</small>
+              </Toast.Header>
+              <Toast.Body>
+                <div>Đây là 1 số tài khoản sẵn.</div>
+                Hoặc tạo tài khoản mới <a href="/register">tại đây</a>
+              </Toast.Body>
+            </Toast>
+            <Toast>
+              <Toast.Header>
+                <img
+                  src="holder.js/20x20?text=%20"
+                  className="rounded mr-2"
+                  alt=""
+                />
+                <strong className="mr-auto">Người tìm việc</strong>
+                <small>1s ago</small>
+              </Toast.Header>
+              <Toast.Body>
+                <div>Tài khoản: username</div>
+                <div>Mật khẩu : password</div>
+              </Toast.Body>
+            </Toast>
+            <Toast>
+              <Toast.Header>
+                <img
+                  src="holder.js/20x20?text=%20"
+                  className="rounded mr-2"
+                  alt=""
+                />
+                <strong className="mr-auto">Người tìm việc</strong>
+                <small>2s ago</small>
+              </Toast.Header>
+              <Toast.Body>
+                <div>Tài khoản: employer1</div>
+                <div>Mật khẩu : password</div>
+              </Toast.Body>
+            </Toast>
+          </div>
+        </div>
         <form className="login" onSubmit={this.handleSubmit}>
           <div className="svgContainer">
             <div>

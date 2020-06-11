@@ -5,12 +5,14 @@ import { Button, Card, Container, Row, Col } from "reactstrap";
 import HTTP from "../../services/request";
 import axios from "axios";
 import history from "../../services/history";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Profile: React.FC = () => {
   const { User, IsLogged }: any = useContext(AuthContext);
   const [user, setUser] = User;
   const [isLogged, setLogged] = IsLogged;
-  axios
+  /*  axios
     .get(HTTP.SERVER + "status", { withCredentials: true })
     .then((response) => response.data)
     .then((message) => {
@@ -18,7 +20,7 @@ const Profile: React.FC = () => {
       } else {
         history.push("/login");
       }
-    });
+    }); */
   return (
     <>
       <main className="profile-page">

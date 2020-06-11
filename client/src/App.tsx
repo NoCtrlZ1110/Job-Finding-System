@@ -3,11 +3,12 @@ import "./App.css";
 import { AppRouter } from "./AppRouter";
 import Navbar from "./components/Navbars/Navbar";
 import SimpleFooter from "./components/Footers/SimpleFooter";
-
+import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <>
       <Navbar />
+
       <link
         href="https://fonts.googleapis.com/css2?family=Bungee&family=Pacifico&display=swap"
         rel="stylesheet"
@@ -50,5 +51,4 @@ function App() {
     </>
   );
 }
-
 export default App;

@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
-import { AuthContext } from "../../services/store";
+import React from "react";
 export const Home = () => {
-  const { user }: any = useContext(AuthContext);
+  // const { user }: any = useContext(AuthContext);
 
   return (
     <div>
@@ -18,7 +17,7 @@ export const Home = () => {
                 fontFamily: "Bungee",
               }}
             >
-              FINDING JOB SYSTEM {user}
+              FINDING JOB SYSTEM
             </h1>
             <h3
               className="lead m-3 blockqoute"

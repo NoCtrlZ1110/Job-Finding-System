@@ -68,7 +68,7 @@ app.use(
   })
 );
 
-// employee
+// employee ------------------------------------------------------------------------------
 
 app.all("/status", function (req, res) {
   if (req.session.status) {
@@ -287,7 +287,7 @@ app.post("/employee/find/:id/submit_apply", function (req, res) {
     ) {
       res.json("done");
     });
-  } else req.json("no account");
+  } else res.json("no account");
 });
 // từ chối lời mời làm việc
 app.post("/employee/find/:id/ignore", function (req, res) {
@@ -299,7 +299,7 @@ app.post("/employee/find/:id/ignore", function (req, res) {
     ) {
       res.json("done");
     });
-  } else req.json("no account");
+  } else res.json("no account");
 });
 // công việc bạn nhận
 app.get("/employee/accept", function (req, res) {
@@ -322,7 +322,7 @@ app.post("/employee/quit", function (req, res) {
     mysql.query(sql, [req.session.employeeId], function (err, response) {
       res.json("it's ok. Find new job.");
     });
-  } else req.json("no account");
+  } else res.json("no account");
 });
 // logout
 app.all("/logout", function (req, res) {
@@ -336,7 +336,7 @@ app.all("/employee/logout", function (req, res) {
   res.send("Logged out!");
   // return /home
 });
-//employer ------
+//employer -------------------------------------------------------------------------------------
 // employer
 // truy cập /employer cho tự động nhảy đến employer/login
 // login
@@ -665,6 +665,82 @@ app.all("/employer/logout", function (req, res) {
   res.send("Logged out!");
   // return /home
 });
+
+// --- PLUS ---
+//employee
+//lọc các công việc
+app.all("/employee/filter_job", function (req, res) {
+  if (req.session.employeeId) {
+    var sql =
+      "select employerJobId,name,nameJob,\
+    (count-(select count(*) from apply where employerJobId=employer.employerId and employee_accept=1)) as count,\
+    area,job,jobDetail,time,salary\
+    from employer inner join employerjob\
+    on employer.employerId = employerjob.employer\
+    where count > (select count(*) from apply where employerJobId=employer.employerId and employee_accept=1)";
+    var data = req.body;
+    if (data.job) sql += " and job = '" + String(data.job) + "'";
+    if (data.area) sql += " and area = '" + String(data.area) + "'";
+    if (data.time) sql += " and time = '" + String(data.time) + "'";
+    mysql.query(sql, function (err, response) {
+      if (response.length) res.json(response);
+      else res.json("no result");
+    });
+  } else res.json("no account");
+});
+//list các công việc
+app.get("/employee/list_job", function (req, res) {
+  if (req.session.employeeId) {
+    var sql =
+      "select employerJobId,name,nameJob,\
+    (count-(select count(*) from apply where employerJobId=employer.employerId and employee_accept=1)) as count,\
+    area,job,jobDetail,time,salary\
+    from employer inner join employerjob\
+    on employer.employerId = employerjob.employer\
+    where count > (select count(*) from apply where employerJobId=employer.employerId and employee_accept=1)";
+    mysql.query(sql, function (err, response) {
+      if (response.length) res.json(response);
+      else res.json("no result");
+    });
+  } else res.json("no account");
+});
+//employer---
+// list các ứng viên
+app.get("/employer/list_candidate", function (req, res) {
+  if (req.session.employerId) {
+    var sql =
+      "select employee.employeeId,name,area,job,jobDetail,salary\
+      from employee\
+      inner join employeejob on employee.employeeId=employeejob.employeeId\
+      where name != 'yourname' and\
+      not exists(select * from apply where employeeId = employee.employeeId and employee_accept = 1)";
+    mysql.query(sql, function (err, response) {
+      if (response.length) res.json(response);
+      else res.json("no result");
+    });
+  } else res.json("no account");
+});
+// lọc các ứng viên
+app.all("/employer/filter_candidate", function (req, res) {
+  if (req.session.employerId) {
+    var sql =
+      "select employee.employeeId,name,area,job,jobDetail,salary\
+      from employee\
+      inner join employeejob on employee.employeeId=employeejob.employeeId\
+      where name != 'yourname' and\
+      not exists(select * from apply where employeeId = employee.employeeId and employee_accept = 1)";
+    var data = req.body;
+    if (data.job) sql += "and job = '" + String(data.job) + "'";
+    if (data.area) sql += "and area = '" + String(data.area) + "'";
+    if (data.time) sql += "and time = '" + String(data.time) + "'";
+    mysql.query(sql, function (err, response) {
+      if (response.length) res.json(response);
+      else res.json("no result");
+    });
+  } else res.json("no account");
+});
+
+// ---
 
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname + "/../client", "build", "index.html"));
