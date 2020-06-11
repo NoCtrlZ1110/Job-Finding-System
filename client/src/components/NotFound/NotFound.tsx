@@ -19,7 +19,15 @@ export const NotFound: React.FC = () => {
     <div className="text-center">
       <br />
       <br />
-      <h1 style={{ color: "#ffffff" }}>
+      <h1
+        style={{
+          color: "#ffffff",
+          fontSize: 55,
+          fontWeight: 500,
+          fontFamily: "Bungee",
+        }}
+        id="shadow"
+      >
         404 NOT FOUND <FontAwesomeIcon icon={faCoffee}></FontAwesomeIcon>
       </h1>
       <h2 style={{ color: "#ffffff" }}>

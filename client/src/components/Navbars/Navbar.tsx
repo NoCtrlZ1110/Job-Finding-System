@@ -25,6 +25,7 @@ import {
   UncontrolledTooltip,
 } from "reactstrap";
 import { AuthContext } from "../../services/store";
+import { toast } from "react-toastify";
 
 export const NavBar: React.FC<{}> = () => {
   const { User, IsLogged }: any = useContext(AuthContext);
@@ -57,8 +58,10 @@ export const NavBar: React.FC<{}> = () => {
       .get(HTTP.SERVER + "logout", { withCredentials: true })
       .then((response) => response.data)
       .then((message) => {
-        alert(message);
-        window.location.href = "/";
+        toast.success("😭 Đăng xuất thành công!");
+        setInterval(() => {
+          window.location.href = "/";
+        }, 1700);
       });
   };
 

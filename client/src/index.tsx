@@ -7,13 +7,28 @@ import "./assets/vendor/nucleo/css/nucleo.css";
 import "./assets/vendor/font-awesome/css/font-awesome.min.css";
 import "./assets/scss/argon-design-system-react.scss";
 import { AuthProvider } from "./services/store";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 ReactDOM.render(
-  // <React.StrictMode>
-  <AuthProvider>
-    <App />
-  </AuthProvider>,
-  // </React.StrictMode>,
+  <React.StrictMode>
+    <AuthProvider>
+      <span style={{ fontSize: 18 }}>
+        <ToastContainer
+          position="top-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+      </span>
+      <App />
+    </AuthProvider>
+  </React.StrictMode>,
   document.getElementById("root")
 );
 

@@ -18,6 +18,10 @@ import { EmployerInfo } from "./components/Employer/Info/EmployerInfo";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Profile from "./components/Profile/Profile";
+import axios from "axios";
+import HTTP from "./services/request";
+import { toast } from "react-toastify";
+
 // import Profile from "./views/examples/Profile";
 
 const routes = [
@@ -46,12 +50,13 @@ const routes = [
     component: Select,
     exact: true,
   },
-  { path: "/profile", component: Profile },
+  { path: "/profile", component: Profile, private: true },
   { path: "/employee/info/:id", component: EmployeeInfo },
   { path: "/employer/info/:id", component: EmployerInfo },
   {
     path: "/employee",
     component: Employee,
+    private: true,
     // exact: true,
     routes: [
       { path: "/employee/find", component: FindJob, exact: true },
@@ -61,6 +66,7 @@ const routes = [
   {
     path: "/employer",
     component: Employer,
+    private: true,
     routes: [
       { path: "/employer/find", component: FindEmployee },
       { path: "/employer/create", component: CreateJob },
@@ -69,6 +75,7 @@ const routes = [
   {
     path: "/list",
     component: List,
+    private: true,
     routes: [
       { path: "/list/employee", component: EmployeeList },
       { path: "/list/employer", component: EmployerList },
@@ -93,12 +100,34 @@ export function AppRouter(props: any) {
 }
 
 export function RouteWithSubRoutes(route: any) {
+  if (route.private) {
+    axios
+      .get(HTTP.SERVER + "status", { withCredentials: true })
+      .then((response: any) => response.data)
+      .then((message: any) => {
+        if (message === "LOGGED") {
+        } else {
+          history.push("/login");
+          toast.error("😎 Vui lòng đăng nhập trước!", {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+      });
+  }
   return (
     <Route
       path={route.path}
       render={(props) => (
         // pass the sub-routes down to keep nesting
-        <route.component {...props} routes={route.routes} />
+        <>
+          <route.component {...props} routes={route.routes} />
+        </>
       )}
     />
   );
