@@ -2,8 +2,8 @@
 import React from "react";
 const request = import("request");
 var http = {
-  SERVER: "http://localhost:8080/",
-  // SERVER: "/",
+  // SERVER: "http://localhost:8080/",
+  SERVER: "/",
   httpGet: (theUrl: string): any => {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", theUrl, false); // false for synchronous request
