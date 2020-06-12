@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import history from "./services/history";
 import { Router, Switch, Route } from "react-router-dom";
 import { Home } from "./components/Home/HomePage";
@@ -10,9 +10,8 @@ import { FindJob } from "./components/Employee/Find/FindJob";
 import { CreateProfile } from "./components/Employee/CreateProfile/CreateProfile";
 import { FindEmployee } from "./components/Employer/FindEmployee/FindEmployee";
 import { CreateJob } from "./components/Employer/CreateJob/CreateJob";
-import { List } from "./components/List/List";
-import { EmployeeList } from "./components/List/EmployeeList/EmployeeList";
-import { EmployerList } from "./components/List/EmployerList/EmployerList";
+import { EmployeeList } from "./components/Employer/EmployeeList/EmployeeList";
+import { JobList } from "./components/Employee/JobList/JobList";
 import { EmployeeInfo } from "./components/Employee/Info/EmployeeInfo";
 import { EmployerInfo } from "./components/Employer/Info/EmployerInfo";
 import Login from "./components/Login/Login";
@@ -21,8 +20,6 @@ import Profile from "./components/Profile/Profile";
 import axios from "axios";
 import HTTP from "./services/request";
 import { toast } from "react-toastify";
-
-// import Profile from "./views/examples/Profile";
 
 const routes = [
   {
@@ -57,28 +54,32 @@ const routes = [
     path: "/employee",
     component: Employee,
     private: true,
-    // exact: true,
+    role: "employee",
     routes: [
-      { path: "/employee/find", component: FindJob, exact: true },
-      { path: "/employee/create", component: CreateProfile, exact: true },
+      { path: "/employee/list", role: "employer", component: JobList },
+      {
+        path: "/employee/find",
+        component: FindJob,
+        exact: true,
+        role: "employee",
+      },
+      {
+        path: "/employee/create",
+        component: CreateProfile,
+        exact: true,
+        role: "employee",
+      },
     ],
   },
   {
     path: "/employer",
     component: Employer,
     private: true,
+    role: "employer",
     routes: [
-      { path: "/employer/find", component: FindEmployee },
-      { path: "/employer/create", component: CreateJob },
-    ],
-  },
-  {
-    path: "/list",
-    component: List,
-    private: true,
-    routes: [
-      { path: "/list/employee", component: EmployeeList },
-      { path: "/list/employer", component: EmployerList },
+      { path: "/employer/list", role: "employer", component: EmployeeList },
+      { path: "/employer/find", role: "employer", component: FindEmployee },
+      { path: "/employer/create", role: "employer", component: CreateJob },
     ],
   },
   {
@@ -99,16 +100,18 @@ export function AppRouter(props: any) {
   );
 }
 
-export function RouteWithSubRoutes(route: any) {
-  if (route.private) {
+export function checkRoute(route: any) {
+  console.log(route);
+
+  if (route.role) {
     axios
-      .get(HTTP.SERVER + "status", { withCredentials: true })
+      .get(HTTP.SERVER + "currentAccount", { withCredentials: true })
       .then((response: any) => response.data)
-      .then((message: any) => {
-        if (message === "LOGGED") {
+      .then((data: any) => {
+        if (data.type === route.role) {
         } else {
-          history.push("/login");
-          toast.error("😎 Vui lòng đăng nhập trước!", {
+          history.push("/");
+          toast.error("🙄 Đây không phải vai trò của bạn", {
             position: "bottom-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -120,6 +123,33 @@ export function RouteWithSubRoutes(route: any) {
         }
       });
   }
+}
+
+export function RouteWithSubRoutes(route: any) {
+  useEffect(() => {
+    if (route.private) {
+      axios
+        .get(HTTP.SERVER + "status", { withCredentials: true })
+        .then((response: any) => response.data)
+        .then((message: any) => {
+          if (message === "LOGGED") {
+            checkRoute(route);
+          } else {
+            history.push("/login");
+            toast.error("😎 Vui lòng đăng nhập trước!", {
+              position: "bottom-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+          }
+        });
+    }
+  }, [route]);
+
   return (
     <Route
       path={route.path}

@@ -21,6 +21,13 @@ export const Employer: React.FC<{ routes: any }> = ({ routes }) => {
             </Button>
           </div>
           <div>
+            <Link to="list">
+              <Button className="m-3" variant="success" id="sideBtn">
+                Tất cả ứng viên
+              </Button>
+            </Link>
+          </div>
+          <div>
             <Link to="find">
               <Button className="m-3" variant="success" id="sideBtn">
                 Tìm kiếm ứng viên
@@ -31,13 +38,6 @@ export const Employer: React.FC<{ routes: any }> = ({ routes }) => {
             <Link to="create">
               <Button className="m-3" variant="info" id="sideBtn">
                 Tạo hồ sơ tuyển dụng
-              </Button>
-            </Link>
-          </div>
-          <div>
-            <Link to="/list/employee">
-              <Button className="m-3" variant="success" id="sideBtn">
-                Tất cả ứng viên
               </Button>
             </Link>
           </div>

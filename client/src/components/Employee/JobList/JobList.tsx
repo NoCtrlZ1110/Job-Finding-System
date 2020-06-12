@@ -1,17 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import BootstrapTable from "react-bootstrap-table-next";
 import HTTP from "../../../services/request";
 import paginationFactory from "react-bootstrap-table2-paginator";
-import { Link } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
+import axios from "axios";
 
-export const EmployeeList: React.FC = () => {
-  const getEmployee = () => {
-    return JSON.parse(HTTP.httpGet(HTTP.SERVER + "employee/list"));
+export const JobList: React.FC = () => {
+  const [list, setList] = useState([]);
+
+  const getEmployer = () => {
+    axios
+      .get(HTTP.SERVER + "employee/list_job", { withCredentials: true })
+      .then((response) => response.data)
+      .then((data) => {
+        setList(data);
+      });
   };
+  useEffect(() => getEmployer(), []);
 
   const options = {
     // pageStartIndex: 0,
@@ -22,7 +29,7 @@ export const EmployeeList: React.FC = () => {
 
   const columns = [
     {
-      dataField: "employee_id",
+      dataField: "employerJobId",
       text: "ID",
     },
     {
@@ -30,24 +37,20 @@ export const EmployeeList: React.FC = () => {
       text: "Name",
     },
     {
-      dataField: "sex",
-      text: "Sex",
-    },
-    {
-      dataField: "age",
-      text: "Age",
-    },
-    {
       dataField: "area",
       text: "Khu Vực",
     },
     {
-      dataField: "address",
-      text: "Địa chỉ",
+      dataField: "nameJob",
+      text: "Tên công việc",
     },
     {
       dataField: "job",
       text: "Ngành",
+    },
+    {
+      dataField: "jobDetail",
+      text: "Cụ thể",
     },
     {
       dataField: "time",
@@ -55,21 +58,18 @@ export const EmployeeList: React.FC = () => {
     },
     {
       dataField: "salary",
-      text: "Lương mong muốn",
+      text: "Lương",
     },
     {
-      dataField: "talent",
-      text: "Điểm mạnh",
+      dataField: "count",
+      text: "Số lượng",
     },
+
     {
-      dataField: "comment",
-      text: "Ghi chú",
-    },
-    {
-      dataField: "employee_id",
+      dataField: "employerJobId",
       text: "Action",
       formatter: (cellContent: any, row: any) => {
-        let link = `/employee/info/${cellContent}`;
+        let link = `/employer/info/${cellContent}`;
         return (
           <a className="btn btn-success" href={link}>
             Chi tiết
@@ -86,15 +86,7 @@ export const EmployeeList: React.FC = () => {
           <h5>
             <Row>
               <Col>
-                <div className="mt-3">THỐNG KÊ TẤT CẢ CÁC ỨNG VIÊN</div>
-              </Col>
-              <Col style={{ textAlign: "right" }}>
-                <Button disabled className="btn btn-info mx-2 mt-2">
-                  Người tìm việc
-                </Button>
-                <Link to="employer" className="btn btn-info mx-2 mt-2">
-                  Nhà tuyển dụng
-                </Link>
+                <div className="mt-3">THỐNG KÊ TẤT CẢ NHÀ TUYỂN DỤNG</div>
               </Col>
             </Row>
           </h5>
@@ -102,7 +94,7 @@ export const EmployeeList: React.FC = () => {
         <Card.Body>
           <BootstrapTable
             keyField="id"
-            data={getEmployee()}
+            data={list}
             columns={columns}
             pagination={paginationFactory(options)}
           />

@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Card, CardImg, Container, Row, Col } from "reactstrap";
-// import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { AuthContext } from "../../services/store";
 
 export const Select: React.FC<any> = ({ routes }) => {
+  const { User, IsLogged }: any = useContext(AuthContext);
+  const [user] = User;
+  const [isLogged] = IsLogged;
   return (
     <div>
       <div className="container">
@@ -18,36 +20,71 @@ export const Select: React.FC<any> = ({ routes }) => {
                 fontFamily: "Bungee",
               }}
             >
-              WHO ARE YOU?
+              {isLogged === "LOGGED" ? "BẠN LÀ" : "WHO ARE YOU?"}
               <br />
               <br />
             </h1>
             <br />
             <Container className="container-lg">
-              <Row>
-                <Col className="mb-5 mb-md-0" md="5">
-                  <Card className="card-lift--hover shadow border-0">
-                    <Link to="/employer/">
-                      <CardImg
-                        alt="..."
-                        src={require("../../img/employer.png")}
-                      />
-                    </Link>
-                  </Card>
-                </Col>
-                {/* <Col md={2} /> */}
-                <Col />
-                <Col className="mb-5 mb-lg-0 " md="5">
-                  <Card className="card-lift--hover shadow border-0">
-                    <Link to="/employee/">
-                      <CardImg
-                        alt="..."
-                        src={require("../../img/employee.png")}
-                      />
-                    </Link>
-                  </Card>
-                </Col>
-              </Row>
+              {user ? (
+                user.type === "employer" ? (
+                  <Row>
+                    <Col md={3} />
+                    <Col className="mb-5 mb-md-0">
+                      <Card className="card-lift--hover shadow border-0">
+                        <Link to="/employer/list">
+                          <CardImg
+                            alt="..."
+                            src={require("../../img/employer.png")}
+                          />
+                        </Link>
+                      </Card>
+                    </Col>
+                    <Col md={3} />
+                  </Row>
+                ) : (
+                  <Row>
+                    <Col md={3} />
+                    <Col className="mb-5 mb-lg-0 ">
+                      <Card className="card-lift--hover shadow border-0">
+                        <Link to="/employee/list">
+                          <CardImg
+                            alt="..."
+                            src={require("../../img/employee.png")}
+                          />
+                        </Link>
+                      </Card>
+                    </Col>
+                    <Col md={3} />
+                  </Row>
+                )
+              ) : (
+                <Row>
+                  <Col className="mb-5 mb-md-0" md="5">
+                    <Card className="card-lift--hover shadow border-0">
+                      <Link to="/employer/">
+                        <CardImg
+                          alt="..."
+                          src={require("../../img/employer.png")}
+                        />
+                      </Link>
+                    </Card>
+                  </Col>
+                  <Col />
+                  <Col className="mb-5 mb-lg-0 " md="5">
+                    <Card className="card-lift--hover shadow border-0">
+                      <Link to="/employee/">
+                        <CardImg
+                          alt="..."
+                          src={require("../../img/employee.png")}
+                        />
+                      </Link>
+                    </Card>
+                  </Col>
+                </Row>
+              )}
+
+              {/* <Col md={2} /> */}
             </Container>
           </div>
         </div>

@@ -709,7 +709,7 @@ app.get("/employee/list_job", function (req, res) {
 app.get("/employer/list_candidate", function (req, res) {
   if (req.session.employerId) {
     var sql =
-      "select employee.employeeId,name,area,job,jobDetail,salary\
+      "select employee.employeeId,age,name,area,job,jobDetail,salary\
       from employee\
       inner join employeejob on employee.employeeId=employeejob.employeeId\
       where name != 'yourname' and\

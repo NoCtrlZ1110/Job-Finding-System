@@ -4,7 +4,8 @@ import { BrowserRouter } from "react-router-dom";
 import logo from "../../img/logo_.png";
 import axios from "axios";
 import HTTP from "../../services/request";
-
+import { AuthContext } from "../../services/store";
+import { toast } from "react-toastify";
 // reactstrap components
 import {
   Button,
@@ -24,8 +25,6 @@ import {
   Col,
   UncontrolledTooltip,
 } from "reactstrap";
-import { AuthContext } from "../../services/store";
-import { toast } from "react-toastify";
 
 export const NavBar: React.FC<{}> = () => {
   const { User, IsLogged }: any = useContext(AuthContext);
@@ -58,10 +57,10 @@ export const NavBar: React.FC<{}> = () => {
       .get(HTTP.SERVER + "logout", { withCredentials: true })
       .then((response) => response.data)
       .then((message) => {
-        toast.success("😭 Đăng xuất thành công!");
+        toast.success("😭 Đăng xuất thành công!", { autoClose: 1800 });
         setInterval(() => {
           window.location.href = "/";
-        }, 1700);
+        }, 2000);
       });
   };
 

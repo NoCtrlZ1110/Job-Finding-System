@@ -43,7 +43,7 @@ export class Login extends Component {
         if (message === "Đăng nhập thành công!") {
           toast.success("   😎 Đăng nhập thành công!", {
             position: "bottom-right",
-            autoClose: 5000,
+            autoClose: 1800,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -51,8 +51,8 @@ export class Login extends Component {
             progress: undefined,
           });
           setInterval(() => {
-            window.location.href = "/profile";
-          }, 1700);
+            window.location.href = "/select";
+          }, 2000);
         } else {
           toast.error("⚠ Sai tài khoản/ mật khẩu!", {
             position: "bottom-right",
