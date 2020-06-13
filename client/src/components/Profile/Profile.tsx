@@ -168,7 +168,11 @@ const Profile: React.FC = () => {
               <Form.Label>
                 <b>Tên</b>
               </Form.Label>
-              <Form.Control type="name" placeholder={user.name} required />
+              <Form.Control
+                type="name"
+                placeholder={user ? user.name : ""}
+                required
+              />
             </Form.Group>
             <Row>
               {" "}
@@ -189,7 +193,11 @@ const Profile: React.FC = () => {
                   <Form.Label>
                     <b>Tuổi</b>
                   </Form.Label>
-                  <Form.Control type="number" required placeholder={user.age} />
+                  <Form.Control
+                    type="number"
+                    required
+                    placeholder={user ? user.age : ""}
+                  />
                 </Form.Group>
               </Col>
             </Row>
@@ -221,20 +229,28 @@ const Profile: React.FC = () => {
               <Form.Control
                 type="address"
                 required
-                placeholder={user.address}
+                placeholder={user ? user.address : ""}
               />
             </Form.Group>
             <Form.Group controlId="phone">
               <Form.Label>
                 <b>Số điện thoại</b>
               </Form.Label>
-              <Form.Control type="number" required placeholder={user.phone} />
+              <Form.Control
+                type="number"
+                required
+                placeholder={user ? user.phone : ""}
+              />
             </Form.Group>
             <Form.Group controlId="email">
               <Form.Label>
                 <b>Email</b>
               </Form.Label>
-              <Form.Control type="email" required placeholder={user.email} />
+              <Form.Control
+                type="email"
+                required
+                placeholder={user ? user.email : ""}
+              />
             </Form.Group>
           </Modal.Body>
           <Modal.Footer>
