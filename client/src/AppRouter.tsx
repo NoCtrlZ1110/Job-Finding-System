@@ -135,7 +135,11 @@ export function RouteWithSubRoutes(route: any) {
           if (message === "LOGGED") {
             checkRoute(route);
           } else {
-            history.push("/login");
+            // history.push("/login");
+            history.push({
+              pathname: "/login",
+              state: { role: route.role },
+            });
             toast.error("😎 Vui lòng đăng nhập trước!", {
               position: "bottom-right",
               autoClose: 5000,

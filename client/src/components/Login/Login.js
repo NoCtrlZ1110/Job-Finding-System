@@ -16,7 +16,11 @@ import { toast } from "react-toastify";
 export class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { username: "", password: "", type: "" };
+    this.state = {
+      username: "",
+      password: "",
+      type: this.props.location.state ? this.props.location.state.role : "",
+    };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -1189,6 +1193,7 @@ export class Login extends Component {
               <Col sm={8}>
                 <Form.Check
                   required
+                  checked={this.state.type === "employee"}
                   type="radio"
                   label="Người tìm việc"
                   name="type"
@@ -1199,6 +1204,7 @@ export class Login extends Component {
 
                 <Form.Check
                   required
+                  checked={this.state.type === "employer"}
                   type="radio"
                   label="Nhà tuyển dụng"
                   name="type"
