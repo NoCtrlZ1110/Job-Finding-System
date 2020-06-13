@@ -131,7 +131,7 @@ export const NavBar: React.FC<{}> = () => {
                       <div className="dropdown-menu-inner">
                         <Media
                           className="d-flex align-items-center"
-                          href={"/" + role + "/list"}
+                          href={"/" + (role ? role : "employee") + "/list"}
                           // target="_blank"
                         >
                           <div className="icon icon-shape bg-gradient-primary rounded-circle text-white">
@@ -139,20 +139,20 @@ export const NavBar: React.FC<{}> = () => {
                           </div>
                           <Media body className="ml-3">
                             <h6 className="heading text-primary mb-md-1">
-                              {role === "employee"
-                                ? "Tất cả công việc"
-                                : "Tất cả ứng viên"}
+                              {role === "employer"
+                                ? "Tất cả ứng viên"
+                                : "Tất cả công việc"}
                             </h6>
                             <p className="description d-none d-md-inline-block mb-0">
-                              {role === "employee"
-                                ? "Các công việc hiện đang sẵn có"
-                                : "Tất cả người tìm việc hiện có"}
+                              {role === "employer"
+                                ? "Tất cả người tìm việc hiện có"
+                                : "Các công việc hiện đang sẵn có"}
                             </p>
                           </Media>
                         </Media>
                         <Media
                           className="d-flex align-items-center"
-                          href={"/" + role + "/find"}
+                          href={"/" + (role ? role : "employee") + "/find"}
                           // target="_blank"
                         >
                           <div className="icon icon-shape bg-gradient-success rounded-circle text-white">
@@ -160,20 +160,20 @@ export const NavBar: React.FC<{}> = () => {
                           </div>
                           <Media body className="ml-3">
                             <h6 className="heading text-primary mb-md-1">
-                              {role === "employee"
-                                ? "Tìm việc"
-                                : "Tìm ứng viên"}
+                              {role === "employer"
+                                ? "Tìm ứng viên"
+                                : "Tìm việc"}
                             </h6>
                             <p className="description d-none d-md-inline-block mb-0">
-                              {role === "employee"
-                                ? "Tìm công việc theo yêu cầu"
-                                : "Tìm ứng viên theo yêu cầu"}
+                              {role === "employer"
+                                ? "Tìm ứng viên theo yêu cầu"
+                                : "Tìm công việc theo yêu cầu"}
                             </p>
                           </Media>
                         </Media>
                         <Media
                           className="d-flex align-items-center"
-                          href={"/" + role + "/list"}
+                          href={"/" + (role ? role : "employee") + "/list"}
                           // target="_blank"
                         >
                           <div className="icon icon-shape bg-gradient-warning rounded-circle text-white">
@@ -181,9 +181,9 @@ export const NavBar: React.FC<{}> = () => {
                           </div>
                           <Media body className="ml-3">
                             <h5 className="heading text-warning mb-md-1">
-                              {role === "employee"
-                                ? "Công việc phù hợp"
-                                : "Ứng viên phù hợp"}
+                              {role === "employer"
+                                ? "Ứng viên phù hợp"
+                                : "Công việc phù hợp"}
                             </h5>
                             <p className="description d-none d-md-inline-block mb-0">
                               Lọc theo hồ sơ của bạn đưa ra kết quả phù hợp nhất
