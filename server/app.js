@@ -80,10 +80,40 @@ app.all("/status", function (req, res) {
 
 app.all("/currentAccount", (req, res) => {
   if (req.session.currentAccount) {
-    res.send(req.session.currentAccount);
+    if (req.session.currentAccount.type === "employee") {
+      if (req.session.employeeId) {
+        let sql = "select *\
+        from employee\
+        where employeeId = ?";
+        mysql.query(sql, [req.session.employeeId], function (err, response) {
+          response = response[0];
+          response.type = "employee";
+          res.json(response);
+          res.end();
+        });
+      }
+    } else if (req.session.currentAccount.type === "employer") {
+      if (req.session.employerId) {
+        let sql = "select *\
+        from employer\
+        where employerId = ?";
+        mysql.query(sql, [req.session.employerId], function (err, response) {
+          response = response[0];
+          response.type = "employer";
+          res.json(response);
+          res.end();
+        });
+      }
+    }
+    // res.send(req.session.currentAccount);
   } else res.send("NOTLOGGED");
 });
 
+app.all("/currentRole", (req, res) => {
+  if (req.session.currentAccount) {
+    res.send(req.session.currentAccount.type);
+  } else res.send("NOTLOGGED");
+});
 // truy cập /employee cho tự động nhảy đến employee/login
 // login
 app.all("/employee/login", function (req, res) {
@@ -154,7 +184,7 @@ app.get("/employee/profile", function (req, res) {
       res.end();
     });
   } else {
-    res.json("no account");
+    res.json("NOTLOGGED");
   }
 });
 app.post("/employee/profile", function (req, res) {
@@ -178,7 +208,7 @@ app.post("/employee/profile", function (req, res) {
       }
     );
   } else {
-    res.json("no account");
+    res.json("NOTLOGGED");
   }
 });
 // employee job
@@ -191,7 +221,7 @@ app.get("/employee/job", function (req, res) {
       res.json(response);
     });
   } else {
-    res.json("no account");
+    res.json("NOTLOGGED");
   }
 });
 app.post("/employee/job", function (req, res) {
@@ -214,7 +244,7 @@ app.post("/employee/job", function (req, res) {
       }
     );
   } else {
-    res.json("no account");
+    res.json("NOTLOGGED");
   }
 });
 // employee find
@@ -233,7 +263,7 @@ app.get("/employee/find/:id", function (req, res) {
       res.json(response);
     });
   } else {
-    res.json("no account");
+    res.json("NOTLOGGED");
   }
 });
 // list cong viec phu hop
@@ -258,7 +288,7 @@ app.get("/employee/find", function (req, res) {
       }
     );
   } else {
-    res.json("no account");
+    res.json("NOTLOGGED");
   }
 });
 // list các cty đợi bạn chấp nhận công việc
@@ -275,7 +305,7 @@ app.get("/employee/apply_list", function (req, res) {
     mysql.query(sql, [req.session.employeeId], function (err, response) {
       res.json(response);
     });
-  } else res.json("no account");
+  } else res.json("NOTLOGGED");
 });
 //  gửi hồ sơ đến công ty hoặc chấp nhận tuyển việc
 app.post("/employee/find/:id/submit_apply", function (req, res) {
@@ -287,7 +317,7 @@ app.post("/employee/find/:id/submit_apply", function (req, res) {
     ) {
       res.json("done");
     });
-  } else res.json("no account");
+  } else res.json("NOTLOGGED");
 });
 // từ chối lời mời làm việc
 app.post("/employee/find/:id/ignore", function (req, res) {
@@ -299,7 +329,7 @@ app.post("/employee/find/:id/ignore", function (req, res) {
     ) {
       res.json("done");
     });
-  } else res.json("no account");
+  } else res.json("NOTLOGGED");
 });
 // công việc bạn nhận
 app.get("/employee/accept", function (req, res) {
@@ -313,7 +343,7 @@ app.get("/employee/accept", function (req, res) {
     mysql.query(sql, [req.session.employeeId], function (err, response) {
       res.json(response);
     });
-  } else res.json("no account");
+  } else res.json("NOTLOGGED");
 });
 // nghỉ việc
 app.post("/employee/quit", function (req, res) {
@@ -322,7 +352,7 @@ app.post("/employee/quit", function (req, res) {
     mysql.query(sql, [req.session.employeeId], function (err, response) {
       res.json("it's ok. Find new job.");
     });
-  } else res.json("no account");
+  } else res.json("NOTLOGGED");
 });
 // logout
 app.all("/logout", function (req, res) {
@@ -408,7 +438,7 @@ app.get("/employer/profile", function (req, res) {
       res.end();
     });
   } else {
-    res.json("no account");
+    res.json("NOTLOGGED");
   }
 });
 app.post("/employer/profile", function (req, res) {
@@ -426,11 +456,13 @@ app.post("/employer/profile", function (req, res) {
         data.email,
       ],
       function (err, response) {
+        console.log(data);
+
         res.json("ok");
       }
     );
   } else {
-    res.json("no account");
+    res.json("NOTLOGGED");
   }
 });
 // employer job
@@ -445,7 +477,7 @@ app.get("/employer/job", function (req, res) {
       res.json(response);
     });
   } else {
-    res.json("no account");
+    res.json("NOTLOGGED");
   }
 });
 // job detail
@@ -465,7 +497,7 @@ app.get("/employer/job/:id", function (req, res) {
         } else res.json("not your job");
       }
     );
-  } else res.json("no account");
+  } else res.json("NOTLOGGED");
 });
 
 //create job
@@ -491,7 +523,7 @@ app.post("/employer/job/create", function (req, res) {
         res.json("done");
       }
     );
-  } else res.json("no account");
+  } else res.json("NOTLOGGED");
 });
 
 // find slave :))
@@ -523,7 +555,7 @@ app.get("/employer/job/:id/find", function (req, res) {
         );
       } else res.json("it's not your job");
     });
-  } else res.json("no account");
+  } else res.json("NOTLOGGED");
 });
 //chi tiet
 app.get("/employer/job/:id1/find/:id2", function (req, res) {
@@ -546,7 +578,7 @@ app.get("/employer/job/:id1/find/:id2", function (req, res) {
         });
       } else res.json("it's not your job");
     });
-  } else res.json("no account");
+  } else res.json("NOTLOGGED");
 });
 // moi lam viec
 app.post("/employer/job/:id1/find/:id2/invite", function (req, res) {
@@ -567,7 +599,7 @@ app.post("/employer/job/:id1/find/:id2/invite", function (req, res) {
         });
       else res.json("it's not your job");
     });
-  } else res.json("no account");
+  } else res.json("NOTLOGGED");
 });
 // tu choi
 app.post("/employer/job/:id1/find/:id2/ignore", function (req, res) {
@@ -588,7 +620,7 @@ app.post("/employer/job/:id1/find/:id2/ignore", function (req, res) {
         });
       else res.json("it's not your job");
     });
-  } else res.json("no account");
+  } else res.json("NOTLOGGED");
 });
 // list các hồ sơ xin việc
 app.get("/employer/job/:id/submit_list", function (req, res) {
@@ -612,7 +644,7 @@ app.get("/employer/job/:id/submit_list", function (req, res) {
         });
       else res.json("it's not your job");
     });
-  } else res.json("no account");
+  } else res.json("NOTLOGGED");
 });
 // list các hồ sơ trúng tuyển
 app.get("/employer/job/:id/accept_list", function (req, res) {
@@ -636,7 +668,7 @@ app.get("/employer/job/:id/accept_list", function (req, res) {
         });
       else res.json("it's not your job");
     });
-  } else res.json("no account");
+  } else res.json("NOTLOGGED");
 });
 // đuổi việc
 app.post("/employer/job/:id1/find/:id2/fire", function (req, res) {
@@ -657,7 +689,7 @@ app.post("/employer/job/:id1/find/:id2/fire", function (req, res) {
         });
       else res.json("it's not your job");
     });
-  } else res.json("no account");
+  } else res.json("NOTLOGGED");
 });
 //logout
 app.all("/employer/logout", function (req, res) {
@@ -686,7 +718,7 @@ app.all("/employee/filter_job", function (req, res) {
       if (response.length) res.json(response);
       else res.json("no result");
     });
-  } else res.json("no account");
+  } else res.json("NOTLOGGED");
 });
 //list các công việc
 app.get("/employee/list_job", function (req, res) {
@@ -702,7 +734,7 @@ app.get("/employee/list_job", function (req, res) {
       if (response.length) res.json(response);
       else res.json("no result");
     });
-  } else res.json("no account");
+  } else res.json("NOTLOGGED");
 });
 //employer---
 // list các ứng viên
@@ -718,7 +750,7 @@ app.get("/employer/list_candidate", function (req, res) {
       if (response.length) res.json(response);
       else res.json("no result");
     });
-  } else res.json("no account");
+  } else res.json("NOTLOGGED");
 });
 // lọc các ứng viên
 app.all("/employer/filter_candidate", function (req, res) {
@@ -737,7 +769,7 @@ app.all("/employer/filter_candidate", function (req, res) {
       if (response.length) res.json(response);
       else res.json("no result");
     });
-  } else res.json("no account");
+  } else res.json("NOTLOGGED");
 });
 
 // ---

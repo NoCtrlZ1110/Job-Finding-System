@@ -29,7 +29,7 @@ export const FindJob: React.FC = () => {
 
   const columns = [
     {
-      dataField: "employer_id",
+      dataField: "employerJobId",
       text: "ID",
     },
     {
@@ -41,12 +41,16 @@ export const FindJob: React.FC = () => {
       text: "Khu Vực",
     },
     {
-      dataField: "address",
-      text: "Địa chỉ",
+      dataField: "nameJob",
+      text: "Tên công việc",
     },
     {
       dataField: "job",
       text: "Ngành",
+    },
+    {
+      dataField: "jobDetail",
+      text: "Cụ thể",
     },
     {
       dataField: "time",
@@ -54,20 +58,17 @@ export const FindJob: React.FC = () => {
     },
     {
       dataField: "salary",
-      text: "Lương mong muốn",
+      text: "Lương",
     },
     {
-      dataField: "request",
-      text: "Yêu Cầu",
+      dataField: "count",
+      text: "Số lượng",
     },
-    {
-      dataField: "comment",
-      text: "Ghi chú",
-    },
+
     {
       dataField: "employerJobId",
       text: "Action",
-      formatter: (cellContent: any, _row: any) => {
+      formatter: (cellContent: any, row: any) => {
         let link = `/employer/info/${cellContent}`;
         return (
           <a className="btn btn-success" href={link}>
@@ -92,7 +93,7 @@ export const FindJob: React.FC = () => {
     console.log(data);
 
     axios
-      .get(HTTP.SERVER + "employee/find", { withCredentials: true })
+      .get(HTTP.SERVER + "employee/list_job", { withCredentials: true })
       .then((response) => response.data)
       .then((data) => {
         setData(data);
@@ -197,7 +198,7 @@ export const FindJob: React.FC = () => {
                       type="submit"
                       // onClick={handleShow}
                     >
-                      <b>Tìm kiếm</b>
+                      Tìm kiếm
                       <FontAwesomeIcon className="ml-2" icon={faSearch} />
                     </Button>
                   </div>

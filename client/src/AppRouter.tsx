@@ -48,15 +48,16 @@ const routes = [
     exact: true,
   },
   { path: "/profile", component: Profile, private: true },
-  { path: "/employee/info/:id", component: EmployeeInfo },
-  { path: "/employer/info/:id", component: EmployerInfo },
+  { path: "/employee/info/:id", component: EmployeeInfo, private: true },
+  { path: "/employer/info/:id", component: EmployerInfo, private: true },
   {
     path: "/employee",
     component: Employee,
     private: true,
     role: "employee",
     routes: [
-      { path: "/employee/list", role: "employer", component: JobList },
+      { path: "/employee/profile", role: "employee", component: Profile },
+      { path: "/employee/list", role: "employee", component: JobList },
       {
         path: "/employee/find",
         component: FindJob,
@@ -77,9 +78,30 @@ const routes = [
     private: true,
     role: "employer",
     routes: [
-      { path: "/employer/list", role: "employer", component: EmployeeList },
-      { path: "/employer/find", role: "employer", component: FindEmployee },
-      { path: "/employer/create", role: "employer", component: CreateJob },
+      {
+        path: "/employer/profile",
+        role: "employer",
+        component: Profile,
+        private: true,
+      },
+      {
+        path: "/employer/list",
+        role: "employer",
+        component: EmployeeList,
+        private: true,
+      },
+      {
+        path: "/employer/find",
+        role: "employer",
+        component: FindEmployee,
+        private: true,
+      },
+      {
+        path: "/employer/create",
+        role: "employer",
+        component: CreateJob,
+        private: true,
+      },
     ],
   },
   {
@@ -101,14 +123,12 @@ export function AppRouter(props: any) {
 }
 
 export function checkRoute(route: any) {
-  console.log(route);
-
   if (route.role) {
     axios
-      .get(HTTP.SERVER + "currentAccount", { withCredentials: true })
+      .get(HTTP.SERVER + "currentRole", { withCredentials: true })
       .then((response: any) => response.data)
       .then((data: any) => {
-        if (data.type === route.role) {
+        if (data === route.role) {
         } else {
           history.push("/");
           toast.error("🙄 Đây không phải vai trò của bạn", {

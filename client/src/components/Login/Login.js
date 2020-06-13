@@ -79,6 +79,10 @@ export class Login extends Component {
       .then((response) => response.data)
       .then((message) => {
         if (message === "LOGGED") {
+          toast.info("🙄 Bạn đã đăng nhập rồi mà!", {
+            position: "bottom-right",
+            autoClose: 7000,
+          });
           history.push("/profile");
         } else {
           toast.info(

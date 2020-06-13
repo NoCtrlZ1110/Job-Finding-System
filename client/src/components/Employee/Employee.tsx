@@ -2,7 +2,7 @@ import React from "react";
 import { RouteWithSubRoutes } from "../../AppRouter";
 import { Switch, Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
-import { /* Card, CardImg, */ Container, Row, Col } from "reactstrap";
+import { CardImg, Container, Row, Col } from "reactstrap";
 
 export const Employee: React.FC<{ routes: any }> = ({ routes }) => {
   return (
@@ -11,11 +11,16 @@ export const Employee: React.FC<{ routes: any }> = ({ routes }) => {
       <br />
       <br />
       <Row>
-        <Col md={4}>
+        <Col />
+        <Col md={3}>
           <div>
-            <Button id="sideBtn" variant="secondary">
-              NGƯỜI TÌM VIỆC
-            </Button>
+            <Link to="profile">
+              <CardImg
+                id="sideBtn"
+                alt="..."
+                src={require("../../img/employee.png")}
+              />
+            </Link>
           </div>
           <div>
             <Link to="list">

@@ -4,8 +4,9 @@ import { Card, CardImg, Container, Row, Col } from "reactstrap";
 import { AuthContext } from "../../services/store";
 
 export const Select: React.FC<any> = ({ routes }) => {
-  const { User, IsLogged }: any = useContext(AuthContext);
-  const [user] = User;
+  const { /* User, */ IsLogged, Role }: any = useContext(AuthContext);
+  // const [user] = User;
+  const [role] = Role;
   const [isLogged] = IsLogged;
   return (
     <div>
@@ -26,13 +27,13 @@ export const Select: React.FC<any> = ({ routes }) => {
             </h1>
             <br />
             <Container className="container-lg">
-              {user ? (
-                user.type === "employer" ? (
+              {role ? (
+                role === "employer" ? (
                   <Row>
                     <Col md={3} />
                     <Col className="mb-5 mb-md-0">
                       <Card className="card-lift--hover shadow border-0">
-                        <Link to="/employer/list">
+                        <Link to="/employer/profile">
                           <CardImg
                             alt="..."
                             src={require("../../img/employer.png")}
@@ -47,7 +48,7 @@ export const Select: React.FC<any> = ({ routes }) => {
                     <Col md={3} />
                     <Col className="mb-5 mb-lg-0 ">
                       <Card className="card-lift--hover shadow border-0">
-                        <Link to="/employee/list">
+                        <Link to="/employee/profile">
                           <CardImg
                             alt="..."
                             src={require("../../img/employee.png")}
@@ -92,11 +93,3 @@ export const Select: React.FC<any> = ({ routes }) => {
     </div>
   );
 };
-
-// import { RouteWithSubRoutes } from "../../AppRouter";
-/* <Switch>
-{routes.map((route: any, i: any) => (
-  <RouteWithSubRoutes key={i} {...route} />
-  ))}
-  // Router Outlet!
-  */

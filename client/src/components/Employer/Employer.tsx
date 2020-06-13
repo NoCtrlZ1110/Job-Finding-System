@@ -5,7 +5,7 @@ import { Switch, Link } from "react-router-dom";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col"; */
 import Button from "react-bootstrap/Button";
-import { /* Card, CardImg, */ Container, Row, Col } from "reactstrap";
+import { CardImg, Container, Row, Col } from "reactstrap";
 
 export const Employer: React.FC<{ routes: any }> = ({ routes }) => {
   return (
@@ -16,9 +16,13 @@ export const Employer: React.FC<{ routes: any }> = ({ routes }) => {
       <Row>
         <Col md={4}>
           <div>
-            <Button id="sideBtn" variant="secondary">
-              NHÀ TUYỂN DỤNG
-            </Button>
+            <Link to="profile">
+              <CardImg
+                id="sideBtn"
+                alt="..."
+                src={require("../../img/employer.png")}
+              />
+            </Link>
           </div>
           <div>
             <Link to="list">

@@ -10,6 +10,7 @@ import HTTP from "../../../services/request";
 import Modal from "react-bootstrap/Modal";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
+import axios from "axios";
 
 export const FindEmployee: React.FC = () => {
   const [show, setShow] = useState(false);
@@ -26,17 +27,14 @@ export const FindEmployee: React.FC = () => {
 
   const columns = [
     {
-      dataField: "employee_id",
+      dataField: "employeeId",
       text: "ID",
     },
     {
       dataField: "name",
       text: "Name",
     },
-    {
-      dataField: "sex",
-      text: "Sex",
-    },
+
     {
       dataField: "age",
       text: "Age",
@@ -45,34 +43,25 @@ export const FindEmployee: React.FC = () => {
       dataField: "area",
       text: "Khu Vực",
     },
-    {
-      dataField: "address",
-      text: "Địa chỉ",
-    },
+
     {
       dataField: "job",
       text: "Ngành",
     },
+
     {
-      dataField: "time",
-      text: "Thời gian",
+      dataField: "jobDetail",
+      text: "Mô tả",
     },
     {
       dataField: "salary",
       text: "Lương mong muốn",
     },
+
     {
-      dataField: "talent",
-      text: "Điểm mạnh",
-    },
-    {
-      dataField: "comment",
-      text: "Ghi chú",
-    },
-    {
-      dataField: "employee_id",
+      dataField: "employeeId",
       text: "Action",
-      formatter: (cellContent: any, _row: any) => {
+      formatter: (cellContent: any, row: any) => {
         let link = `/employee/info/${cellContent}`;
         return (
           <a className="btn btn-success" href={link}>
@@ -96,15 +85,16 @@ export const FindEmployee: React.FC = () => {
 
     console.log(data);
 
-    const requestOptions = {
+    /*  const requestOptions = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-    };
-    fetch(HTTP.SERVER + "employer/find", requestOptions)
-      .then((response) => response.json())
+    }; */
+    axios
+      .get(HTTP.SERVER + "employer/list_candidate", { withCredentials: true })
+      .then((response) => response.data)
       .then((data) => {
         setData(data);
         handleShow();
@@ -203,7 +193,7 @@ export const FindEmployee: React.FC = () => {
                 variant="primary"
                 type="submit"
               >
-                <b>Tìm ứng viên</b>
+                Tìm ứng viên
                 <FontAwesomeIcon className="ml-2" icon={faSearch} />
               </Button>
             </div>

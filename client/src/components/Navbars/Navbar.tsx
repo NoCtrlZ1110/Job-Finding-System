@@ -27,8 +27,9 @@ import {
 } from "reactstrap";
 
 export const NavBar: React.FC<{}> = () => {
-  const { User, IsLogged }: any = useContext(AuthContext);
+  const { User, IsLogged, Role }: any = useContext(AuthContext);
   const [user, setUser] = User;
+  const [role, setRole] = Role;
   const [isLogged, setLogged] = IsLogged;
 
   useEffect(() => {
@@ -38,6 +39,14 @@ export const NavBar: React.FC<{}> = () => {
       .get(HTTP.SERVER + "status", { withCredentials: true })
       .then((response) => response.data)
       .then((message) => setLogged(message));
+    axios
+      .get(HTTP.SERVER + "currentRole", { withCredentials: true })
+      .then((response) => response.data)
+      .then((message) => {
+        if (message === "NOTLOGGED") setRole(null);
+        else setRole(message);
+        console.log(message);
+      });
     axios
       .get(HTTP.SERVER + "currentAccount", { withCredentials: true })
       .then((response) => response.data)
@@ -81,12 +90,15 @@ export const NavBar: React.FC<{}> = () => {
             <Container>
               <NavbarBrand className="mr-lg-5">
                 <a href="/">
-                  <img src={logo} alt="logo"></img>
+                  <img src={logo} alt="logo" id="logo"></img>
                 </a>
               </NavbarBrand>
               <button className="navbar-toggler" id="navbar_global">
                 <span className="navbar-toggler-icon" />
               </button>
+              <UncontrolledTooltip delay={0} target="logo">
+                Trang chủ
+              </UncontrolledTooltip>
               <UncontrolledCollapse
                 toggler="#navbar_global"
                 navbar
@@ -113,61 +125,68 @@ export const NavBar: React.FC<{}> = () => {
                   <UncontrolledDropdown nav>
                     <DropdownToggle nav>
                       <i className="ni ni-ui-04 d-lg-none mr-1" />
-                      <span className="nav-link-inner--text">Components</span>
+                      <span className="nav-link-inner--text">Chức năng</span>
                     </DropdownToggle>
                     <DropdownMenu className="dropdown-menu-xl">
                       <div className="dropdown-menu-inner">
                         <Media
                           className="d-flex align-items-center"
-                          href="https://github.com/NoCtrlZ1110/Job-Finding-System"
-                          target="_blank"
+                          href={"/" + role + "/list"}
+                          // target="_blank"
                         >
                           <div className="icon icon-shape bg-gradient-primary rounded-circle text-white">
                             <i className="ni ni-spaceship" />
                           </div>
                           <Media body className="ml-3">
                             <h6 className="heading text-primary mb-md-1">
-                              Getting started
+                              {role === "employee"
+                                ? "Tất cả công việc"
+                                : "Tất cả ứng viên"}
                             </h6>
                             <p className="description d-none d-md-inline-block mb-0">
-                              Learn how to use Argon compiling Scss, change
-                              brand colors and more.
+                              {role === "employee"
+                                ? "Các công việc hiện đang sẵn có"
+                                : "Tất cả người tìm việc hiện có"}
                             </p>
                           </Media>
                         </Media>
                         <Media
                           className="d-flex align-items-center"
-                          href="https://github.com/NoCtrlZ1110/Job-Finding-System"
-                          target="_blank"
+                          href={"/" + role + "/find"}
+                          // target="_blank"
                         >
                           <div className="icon icon-shape bg-gradient-success rounded-circle text-white">
                             <i className="ni ni-palette" />
                           </div>
                           <Media body className="ml-3">
                             <h6 className="heading text-primary mb-md-1">
-                              Foundation
+                              {role === "employee"
+                                ? "Tìm việc"
+                                : "Tìm ứng viên"}
                             </h6>
                             <p className="description d-none d-md-inline-block mb-0">
-                              Learn more about colors, typography, icons and the
-                              grid system we used for Argon.
+                              {role === "employee"
+                                ? "Tìm công việc theo yêu cầu"
+                                : "Tìm ứng viên theo yêu cầu"}
                             </p>
                           </Media>
                         </Media>
                         <Media
                           className="d-flex align-items-center"
-                          href="https://github.com/NoCtrlZ1110/Job-Finding-System"
-                          target="_blank"
+                          href={"/" + role + "/list"}
+                          // target="_blank"
                         >
                           <div className="icon icon-shape bg-gradient-warning rounded-circle text-white">
                             <i className="ni ni-ui-04" />
                           </div>
                           <Media body className="ml-3">
                             <h5 className="heading text-warning mb-md-1">
-                              Components
+                              {role === "employee"
+                                ? "Công việc phù hợp"
+                                : "Ứng viên phù hợp"}
                             </h5>
                             <p className="description d-none d-md-inline-block mb-0">
-                              Browse our 50 beautiful handcrafted components
-                              offered in the Free version.
+                              Lọc theo hồ sơ của bạn đưa ra kết quả phù hợp nhất
                             </p>
                           </Media>
                         </Media>
@@ -177,11 +196,16 @@ export const NavBar: React.FC<{}> = () => {
                   <UncontrolledDropdown nav>
                     <DropdownToggle nav>
                       <i className="ni ni-collection d-lg-none mr-1" />
-                      <span className="nav-link-inner--text">Examples</span>
+                      <span className="nav-link-inner--text">Thông tin</span>
                     </DropdownToggle>
                     <DropdownMenu>
-                      <DropdownItem href="/profile">Profile</DropdownItem>
-                      <DropdownItem href="/login">Login</DropdownItem>
+                      <DropdownItem href="/profile">Trang cá nhân</DropdownItem>
+                      <DropdownItem
+                        href="https://github.com/NoCtrlZ1110/Job-Finding-System"
+                        target="_blank"
+                      >
+                        Mã nguồn
+                      </DropdownItem>
                     </DropdownMenu>
                   </UncontrolledDropdown>
                 </Nav>
