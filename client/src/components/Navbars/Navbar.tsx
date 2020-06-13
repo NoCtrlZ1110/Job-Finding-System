@@ -37,18 +37,16 @@ export const NavBar: React.FC<{}> = () => {
     axios
       .get(HTTP.SERVER + "status", { withCredentials: true })
       .then((response) => response.data)
-      .then((message) => {
-        setLogged(message);
-        if (message === "LOGGED") {
-          axios
-            .get(HTTP.SERVER + "currentAccount", { withCredentials: true })
-            .then((response) => response.data)
-            .then((profile) => {
-              setUser(profile);
-              console.log(profile);
-            });
-        }
+      .then((message) => setLogged(message));
+    axios
+      .get(HTTP.SERVER + "currentAccount", { withCredentials: true })
+      .then((response) => response.data)
+      .then((profile) => {
+        if (profile === "NOTLOGGED") setUser(null);
+        else setUser(profile);
+        console.log(profile);
       });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLogged]);
 
@@ -57,10 +55,14 @@ export const NavBar: React.FC<{}> = () => {
       .get(HTTP.SERVER + "logout", { withCredentials: true })
       .then((response) => response.data)
       .then((message) => {
-        toast.success("😭 Đăng xuất thành công!", { autoClose: 1800 });
-        setInterval(() => {
-          window.location.href = "/";
-        }, 2000);
+        if (message) {
+          toast.success("😭 Đăng xuất thành công!", { autoClose: 1800 });
+          setInterval(() => {
+            window.location.href = "/";
+          }, 2000);
+        } else {
+          toast.success("🙄 Đăng xuất thất bại!", { autoClose: 1800 });
+        }
       });
   };
 

@@ -1,11 +1,24 @@
-import React, { useState, useMemo } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useMemo } from "react";
 
 export const AuthContext = React.createContext(null);
 
+const useStateWithLocalStorage = (localStorageKey) => {
+  const [value, setValue] = React.useState(
+    localStorage.getItem(localStorageKey) || ""
+  );
+
+  React.useEffect(() => {
+    localStorage.setItem(localStorageKey, value);
+  }, [value]);
+
+  return [value, setValue];
+};
+
 export const AuthProvider = ({ children }) => {
   // khởi tạo
-  const [user, setUser] = useState(null);
-  const [isLogged, setLogged] = useState(null);
+  const [user, setUser] = useStateWithLocalStorage("user");
+  const [isLogged, setLogged] = useStateWithLocalStorage("isLogged");
 
   const value = useMemo(
     () => ({ User: [user, setUser], IsLogged: [isLogged, setLogged] }),
