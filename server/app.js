@@ -79,7 +79,7 @@ app.all("/status", function (req, res) {
 });
 
 app.all("/currentAccount", (req, res) => {
-  if (req.session.currentAccount) {
+  if (req.session.status) {
     if (req.session.currentAccount.type === "employee") {
       if (req.session.employeeId) {
         let sql = "select *\
@@ -122,11 +122,11 @@ app.all("/employee/login", function (req, res) {
   var password = data.password;
   if (username && password) {
     mysql.query(
-      /* "SELECT employeeId FROM employeeaccount WHERE username = ? AND password = ?", */
-      `SELECT e.* FROM employeeaccount ea
+      "SELECT employeeId FROM employeeaccount WHERE username = ? AND password = ?",
+      /*  `SELECT e.* FROM employeeaccount ea
       JOIN employee e ON ea.employeeId = e.employeeId
       WHERE ea.username = ? AND ea.password = ?
-      ;`,
+      ;`, */
       [username, password],
       function (error, response) {
         if (response.length > 0) {
@@ -136,6 +136,7 @@ app.all("/employee/login", function (req, res) {
           req.session.currentAccount.type = "employee";
           req.session.employeeId = response[0].employeeId;
           res.json("Đăng nhập thành công!");
+          console.log(req.session);
         } else {
           res.json("Incorrect account and/or Password!");
         }
@@ -250,6 +251,8 @@ app.post("/employee/job", function (req, res) {
 // employee find
 // chi tiet 1 cong viec
 app.get("/employee/find/:id", function (req, res) {
+  console.log(req.session);
+
   if (req.session.employeeId) {
     var sql =
       "select employerJobId,name,area,address,phone,email,nameJob,\
@@ -260,7 +263,7 @@ app.get("/employee/find/:id", function (req, res) {
       where count > (select count(*) from apply where employerJobId=employer.employerId and employee_accept=1)\
       and employerJobId = ?";
     mysql.query(sql, [req.params.id], function (err, response) {
-      res.json(response);
+      res.json(response[0]);
     });
   } else {
     res.json("NOTLOGGED");
@@ -376,10 +379,12 @@ app.all("/employer/login", function (req, res) {
   var password = data.password;
   if (username && password) {
     mysql.query(
-      `SELECT e.* FROM employeraccount ea
+      /* `SELECT e.* FROM employeraccount ea
       JOIN employer e ON ea.employerId = e.employerId
       WHERE ea.username = ? AND ea.password = ?
       ;`,
+      [username, password], */
+      "SELECT employerId FROM employeraccount WHERE username = ? AND password = ?",
       [username, password],
       function (error, response) {
         console.log(response);

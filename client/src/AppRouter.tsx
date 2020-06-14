@@ -20,6 +20,7 @@ import Profile from "./components/Profile/Profile";
 import axios from "axios";
 import HTTP from "./services/request";
 import { toast } from "react-toastify";
+import JobDetail from "./components/Employee/JobDetail/JobDetail";
 
 const routes = [
   {
@@ -48,6 +49,8 @@ const routes = [
     exact: true,
   },
   { path: "/profile", component: Profile, private: true },
+  { path: "/employee/job/:id", component: JobDetail, private: true },
+
   { path: "/employee/info/:id", component: EmployeeInfo, private: true },
   { path: "/employer/info/:id", component: EmployerInfo, private: true },
   {

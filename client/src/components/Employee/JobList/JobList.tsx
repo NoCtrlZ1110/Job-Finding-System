@@ -69,7 +69,7 @@ export const JobList: React.FC = () => {
       dataField: "employerJobId",
       text: "Action",
       formatter: (cellContent: any, row: any) => {
-        let link = `/employer/info/${cellContent}`;
+        let link = `/employee/job/${cellContent}`;
         return (
           <a className="btn btn-success" href={link}>
             Chi tiết
