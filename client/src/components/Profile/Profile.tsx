@@ -72,7 +72,6 @@ const Profile: React.FC = () => {
                       <Button
                         className="mr-4"
                         color="info"
-                        href="#pablo"
                         onClick={handleShow}
                         size="sm"
                       >
@@ -135,7 +134,7 @@ const Profile: React.FC = () => {
                         trong đời thôi.
                       </p>
                       <a
-                        href="#pablo"
+                        href="#showMore"
                         onClick={(e: any) =>
                           toast.info("😁😁😁 Không có gì ở đây hết", {
                             position: "bottom-right",

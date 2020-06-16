@@ -1,7 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
 export const Home = () => {
-  // const { user }: any = useContext(AuthContext);
-
   return (
     <div>
       <div className="container">
@@ -32,9 +31,9 @@ export const Home = () => {
             </h3>
             <br />
             <h2>
-              <a href="/select/" className="btn btn-lg btn-success mt-5">
+              <Link to="/select/" className="btn btn-lg btn-success mt-5">
                 <>Get Started!</>
-              </a>
+              </Link>
             </h2>
           </div>
         </div>

@@ -12,8 +12,6 @@ import { FindEmployee } from "./components/Employer/FindEmployee/FindEmployee";
 import { CreateJob } from "./components/Employer/CreateJob/CreateJob";
 import { EmployeeList } from "./components/Employer/EmployeeList/EmployeeList";
 import { JobList } from "./components/Employee/JobList/JobList";
-import { EmployeeInfo } from "./components/Employee/Info/EmployeeInfo";
-import { EmployerInfo } from "./components/Employer/Info/EmployerInfo";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import Profile from "./components/Profile/Profile";
@@ -21,6 +19,7 @@ import axios from "axios";
 import HTTP from "./services/request";
 import { toast } from "react-toastify";
 import JobDetail from "./components/Employee/JobDetail/JobDetail";
+import EmployeeJobDetail from "./components/Employer/EmployeeJobDetail/EmployeeJobDetail";
 
 const routes = [
   {
@@ -51,8 +50,11 @@ const routes = [
   { path: "/profile", component: Profile, private: true },
   { path: "/employee/job/:id", component: JobDetail, private: true },
 
-  { path: "/employee/info/:id", component: EmployeeInfo, private: true },
-  { path: "/employer/info/:id", component: EmployerInfo, private: true },
+  {
+    path: "/employer/employeeInfo/:id",
+    component: EmployeeJobDetail,
+    private: true,
+  },
   {
     path: "/employee",
     component: Employee,

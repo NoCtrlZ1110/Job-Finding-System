@@ -10,6 +10,7 @@ import axios from "axios";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import { toast } from "react-toastify";
 
 export class Register extends Component {
   constructor(props) {
@@ -40,10 +41,10 @@ export class Register extends Component {
       })
       .then((response) => response.data)
       .then((message) => {
-        alert(message);
         if (message === "Đăng ký thành công!\nĐăng nhập ngay.") {
-          window.location.href = "/login";
-        }
+          toast("😁 Đăng ký thành công. Hãy đăng nhập ^^");
+          setInterval(() => (window.location.href = "/login"), 1500);
+        } else toast.error("🤔 Đăng ký thất bại!");
       });
 
     event.preventDefault();

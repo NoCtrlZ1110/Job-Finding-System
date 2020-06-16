@@ -219,7 +219,7 @@ app.get("/employee/job", function (req, res) {
     from employeejob\
     where employeeId = ?";
     mysql.query(sql, [req.session.employeeId], function (err, response) {
-      res.json(response);
+      res.json(response[0]);
     });
   } else {
     res.json("NOTLOGGED");
@@ -778,6 +778,20 @@ app.all("/employer/filter_candidate", function (req, res) {
 });
 
 // ---
+
+app.get("/employer/find/:id", function (req, res) {
+  if (req.session.employerId) {
+    var sql =
+      "select employee.*,job,jobDetail,time,salary,talent,comment\
+                      from employee\
+                      inner join employeejob on employee.employeeId=employeejob.employeeId\
+                      where employee.employeeId = ?";
+    mysql.query(sql, [req.params.id], function (err, response) {
+      if (response) res.json(response[0]);
+      else res.json("not found");
+    });
+  } else res.json("NOTLOGGED");
+});
 
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname + "/../client", "build", "index.html"));

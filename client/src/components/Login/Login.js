@@ -793,7 +793,7 @@ export class Login extends Component {
                   className="rounded mr-2"
                   alt=""
                 />
-                <strong className="mr-auto">Người tìm việc</strong>
+                <strong className="mr-auto">Nhà tuyển dụng</strong>
                 <small>2s ago</small>
               </Toast.Header>
               <Toast.Body>

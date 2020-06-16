@@ -11,6 +11,7 @@ import Modal from "react-bootstrap/Modal";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export const FindEmployee: React.FC = () => {
   const [show, setShow] = useState(false);
@@ -62,7 +63,7 @@ export const FindEmployee: React.FC = () => {
       dataField: "employeeId",
       text: "Action",
       formatter: (cellContent: any, row: any) => {
-        let link = `/employee/info/${cellContent}`;
+        let link = `/employer/employeeInfo/${cellContent}`;
         return (
           <a className="btn btn-success" href={link}>
             Chi tiết
@@ -80,7 +81,6 @@ export const FindEmployee: React.FC = () => {
       area: event.target.elements.area.value,
       job: event.target.elements.job.value,
       time: event.target.elements.time.value,
-      salary: event.target.elements.salary.value,
     };
 
     console.log(data);
@@ -93,11 +93,17 @@ export const FindEmployee: React.FC = () => {
       body: JSON.stringify(data),
     }; */
     axios
-      .get(HTTP.SERVER + "employer/list_candidate", { withCredentials: true })
+      .post(HTTP.SERVER + "employer/filter_candidate", data, {
+        withCredentials: true,
+      })
       .then((response) => response.data)
       .then((data) => {
-        setData(data);
-        handleShow();
+        if (data === "no result") {
+          toast.error("🙄 Không tìm thấy két quả nào!");
+        } else {
+          setData(data);
+          handleShow();
+        }
       });
   };
 
@@ -111,13 +117,26 @@ export const FindEmployee: React.FC = () => {
         </Card.Header>
         <Card.Body style={{ textAlign: "left" }}>
           <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="job">
+              <Form.Label>
+                <b>Công việc</b>
+              </Form.Label>
+              <Form.Control as="select">
+                <option value="">---</option>
+                <option>CNTT</option>
+                <option>Gia Sư</option>
+                <option>Bán Hàng</option>
+                <option>Sửa Chữa</option>
+                <option>Xây Dựng</option>
+              </Form.Control>
+            </Form.Group>
             <Row>
               <Col>
                 <Form.Group>
                   <Form.Label>
                     <b>Tỉnh Thành</b>
                   </Form.Label>
-                  <Form.Control required as="select">
+                  <Form.Control as="select">
                     <option value="">---</option>
                     <option>Hà Nội</option>
                   </Form.Control>
@@ -128,7 +147,7 @@ export const FindEmployee: React.FC = () => {
                   <Form.Label>
                     <b>Khu Vực</b>
                   </Form.Label>
-                  <Form.Control required as="select">
+                  <Form.Control as="select">
                     <option value="">---</option>
                     <option>Ba Đình</option>
                     <option>Bắc Từ Liêm</option>
@@ -147,44 +166,16 @@ export const FindEmployee: React.FC = () => {
                 </Form.Group>
               </Col>
             </Row>
-            <Form.Group controlId="job">
-              <Form.Label>
-                <b>Loại công việc</b>
-              </Form.Label>
-              <Form.Control as="select">
-                <option value="">---</option>
-                <option>C</option>
-                <option>C++</option>
-                <option>Java</option>
-                <option>Web</option>
-                <option>Front-end</option>
-                <option>Back-end</option>
-                <option>Mobile App</option>
-                <option>Data Science</option>
-                <option>Machine Learning</option>
-                <option>Artificial Intelligence</option>
-              </Form.Control>
-            </Form.Group>
             <Form.Group controlId="time">
               <Form.Label>
                 <b>Thời gian làm việc</b>
               </Form.Label>
               <Form.Control as="select">
                 <option value="">---</option>
-                <option>Ca sáng</option>
-                <option>Ca tối</option>
-                <option>Cả ngày</option>
+                <option value="Sáng">Ca sáng</option>
+                <option value="Tối">Ca tối</option>
+                <option value="Cả Ngày">Cả ngày</option>
               </Form.Control>
-            </Form.Group>
-
-            <Form.Group controlId="salary">
-              <Form.Label>
-                <b>Mức lương tối đa</b>
-              </Form.Label>
-              <Form.Control
-                type="destination"
-                placeholder="Đơn vị: Nghìn $/giờ"
-              />
             </Form.Group>
 
             <div className="d-flex flex-row-reverse">

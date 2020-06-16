@@ -11,34 +11,32 @@ import Table from "react-bootstrap/Table";
 import axios from "axios";
 import HTTP from "../../../services/request";
 
-const JobDetail: React.FC = () => {
+const EmployeeJobDetail: React.FC = () => {
   let { id }: any = useParams();
-  const [job, setJob]: any = useState(null);
-
-  const handleApply = () => {
-    axios
-      .post(
-        HTTP.SERVER + "employee/find/" + id + "/submit_apply",
-        {},
-        {
-          withCredentials: true,
-        }
-      )
-      .then((response) => response.data)
-      .then((msg) => {
-        if (msg === "done")
-          toast.success("😋 Xin việc thành công!", {
-            position: "bottom-right",
-          });
-        else toast.error("😥 Xin việc thất bại!");
-      });
+  const [info, setInfo]: any = useState(null);
+  const handleInvite = () => {
+    toast.info("Tính năng đang phát triền 😝", { position: "bottom-right" });
+    // axios
+    //   .post(
+    //     HTTP.SERVER + "employee/find/" + id + "/submit_apply",
+    //     {},
+    //     {
+    //       withCredentials: true,
+    //     }
+    //   )
+    //   .then((response) => response.data)
+    //   .then((msg) => {
+    //     if (msg === "done") toast.success("😋 Xin việc thành công!");
+    //     else toast.error("😥 Xin việc thất bại!");
+    //   });
   };
 
   useEffect(() => {
     axios
-      .get(HTTP.SERVER + "employee/find/" + id, { withCredentials: true })
+      .get(HTTP.SERVER + "employer/find/" + id, { withCredentials: true })
       .then((response) => response.data)
-      .then((data) => setJob(data));
+      .then((data) => setInfo(data));
+    // .then(()=>console.log(user);
   }, [id]);
   return (
     <>
@@ -66,23 +64,18 @@ const JobDetail: React.FC = () => {
                       <Button
                         className="mr-4"
                         color="info"
-                        onClick={handleApply}
+                        onClick={handleInvite}
                         size="sm"
                       >
-                        Xin việc
+                        Tuyển dụng
                       </Button>
                     </div>
                   </Col>
                   <Col className="order-lg-1" lg="4">
                     <div className="card-profile-stats d-flex justify-content-center">
                       <div>
-                        <span className="heading">{job ? job.count : ""}</span>
-                        <span className="description">Số lượng</span>
-                      </div>
-
-                      <div>
                         <span className="heading">
-                          {job ? job.salary + "$" : ""}
+                          {info ? info.salary + "$" : ""}
                         </span>
                         <span className="description">Lương (/giờ)</span>
                       </div>
@@ -91,9 +84,9 @@ const JobDetail: React.FC = () => {
                 </Row>
                 <div className="text-center mt-5">
                   <h3>
-                    {job ? job.name : ""}
+                    {info ? info.name : ""}
                     <span className="font-weight-light">
-                      , {job ? job.age : ""}
+                      , {info ? info.age : ""}
                     </span>
                   </h3>
 
@@ -101,56 +94,46 @@ const JobDetail: React.FC = () => {
                     <br />
                     <tbody>
                       <tr>
-                        <td>Vai trò</td>
-                        <td>{job ? job.nameJob : ""}</td>
+                        <td>Giới tính</td>
+                        <td>{info ? info.sex : ""}</td>
                       </tr>
                       <tr>
                         <td>Công việc</td>
-                        <td>{job ? job.job : ""}</td>
+                        <td>{info ? info.job : ""}</td>
                       </tr>
                       <tr>
                         <td>Mô tả</td>
-                        <td>{job ? job.job : ""}</td>
+                        <td>{info ? info.jobDetail : ""}</td>
                       </tr>
-                      <tr>
-                        <td>Số lượng</td>
-                        <td>{job ? job.count : ""}</td>
-                      </tr>
+
                       <tr>
                         <td>Thời gian</td>
-                        <td>{job ? job.time : ""}</td>
+                        <td>{info ? info.time : ""}</td>
+                      </tr>
+
+                      <tr>
+                        <td>Lương mong muốn</td>
+                        <td>{info ? info.salary + "$ / giờ" : ""}</td>
                       </tr>
                       <tr>
-                        <td>Làm việc từ</td>
-                        <td>
-                          {job
-                            ? JSON.stringify(job.dateStart).slice(1, 11)
-                            : ""}
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>Lương</td>
-                        <td>{job ? job.salary + "$ / giờ" : ""}</td>
-                      </tr>
-                      <tr>
-                        <td>Yêu cầu</td>
-                        <td>{job ? job.require : ""}</td>
+                        <td>Ưu điểm</td>
+                        <td>{info ? info.talent : ""}</td>
                       </tr>
                       <tr>
                         <td>Khu vực</td>
-                        <td>{job ? job.area : ""}</td>
+                        <td>{info ? info.area : ""}</td>
                       </tr>
                       <tr>
                         <td>Địa chỉ</td>
-                        <td>{job ? job.address : ""}</td>
+                        <td>{info ? info.address : ""}</td>
                       </tr>
                       <tr>
                         <td>Điện thoại</td>
-                        <td>{job ? job.phone : ""}</td>
+                        <td>{info ? info.phone : ""}</td>
                       </tr>
                       <tr>
                         <td>Email</td>
-                        <td>{job ? job.email : ""}</td>
+                        <td>{info ? info.email : ""}</td>
                       </tr>
                     </tbody>
                   </Table>
@@ -184,4 +167,4 @@ const JobDetail: React.FC = () => {
   );
 };
 
-export default JobDetail;
+export default EmployeeJobDetail;

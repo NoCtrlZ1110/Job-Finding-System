@@ -12,6 +12,7 @@ import HTTP from "../../../services/request";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export const FindJob: React.FC = () => {
   const [show, setShow] = useState(false);
@@ -69,7 +70,7 @@ export const FindJob: React.FC = () => {
       dataField: "employerJobId",
       text: "Action",
       formatter: (cellContent: any, row: any) => {
-        let link = `/employer/info/${cellContent}`;
+        let link = `/employee/job/${cellContent}`;
         return (
           <a className="btn btn-success" href={link}>
             Chi tiết
@@ -87,17 +88,22 @@ export const FindJob: React.FC = () => {
       area: event.target.elements.area.value,
       job: event.target.elements.job.value,
       time: event.target.elements.time.value,
-      salary: event.target.elements.salary.value,
+      // salary: event.target.elements.salary.value,
     };
 
     console.log(data);
 
     axios
-      .get(HTTP.SERVER + "employee/list_job", { withCredentials: true })
+      .post(HTTP.SERVER + "employee/filter_job", data, {
+        withCredentials: true,
+      })
       .then((response) => response.data)
       .then((data) => {
-        setData(data);
-        handleShow();
+        if (data === "no result") toast.error("Không tìm thấy kết quả nào!");
+        else {
+          setData(data);
+          handleShow();
+        }
       });
   };
 
@@ -131,7 +137,7 @@ export const FindJob: React.FC = () => {
                         <Form.Label>
                           <b>Khu Vực</b>
                         </Form.Label>
-                        <Form.Control required as="select">
+                        <Form.Control as="select">
                           <option value="">---</option>
                           <option>Ba Đình</option>
                           <option>Bắc Từ Liêm</option>
@@ -152,20 +158,15 @@ export const FindJob: React.FC = () => {
                   </Row>
                   <Form.Group controlId="job">
                     <Form.Label>
-                      <b>Loại công việc</b>
+                      <b>Công việc</b>
                     </Form.Label>
                     <Form.Control as="select">
                       <option value="">---</option>
-                      <option>C</option>
-                      <option>C++</option>
-                      <option>Java</option>
-                      <option>Web</option>
-                      <option>Front-end</option>
-                      <option>Back-end</option>
-                      <option>Mobile App</option>
-                      <option>Data Science</option>
-                      <option>Machine Learning</option>
-                      <option>Artificial Intelligence</option>
+                      <option>CNTT</option>
+                      <option>Gia Sư</option>
+                      <option>Bán Hàng</option>
+                      <option>Sửa Chữa</option>
+                      <option>Xây Dựng</option>
                     </Form.Control>
                   </Form.Group>
 
@@ -185,9 +186,9 @@ export const FindJob: React.FC = () => {
                     </Form.Label>
                     <Form.Control as="select">
                       <option value="">---</option>
-                      <option>Ca sáng</option>
-                      <option>Ca tối</option>
-                      <option>Cả ngày</option>
+                      <option value="Sáng">Ca sáng</option>
+                      <option value="Tối">Ca tối</option>
+                      <option value="Cả Ngày">Cả ngày</option>
                     </Form.Control>
                   </Form.Group>
 
