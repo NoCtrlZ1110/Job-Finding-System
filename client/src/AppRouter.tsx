@@ -61,10 +61,10 @@ const routes = [
     private: true,
     role: "employee",
     routes: [
-      { path: "/employee/profile", role: "employee", component: Profile },
+      { path: "/employee/profileInfo", role: "employee", component: Profile },
       { path: "/employee/list", role: "employee", component: JobList },
       {
-        path: "/employee/find",
+        path: "/employee/findJob",
         component: FindJob,
         exact: true,
         role: "employee",
@@ -84,7 +84,7 @@ const routes = [
     role: "employer",
     routes: [
       {
-        path: "/employer/profile",
+        path: "/employer/profileInfo",
         role: "employer",
         component: Profile,
         private: true,
@@ -96,7 +96,7 @@ const routes = [
         private: true,
       },
       {
-        path: "/employer/find",
+        path: "/employer/findEmployee",
         role: "employer",
         component: FindEmployee,
         private: true,

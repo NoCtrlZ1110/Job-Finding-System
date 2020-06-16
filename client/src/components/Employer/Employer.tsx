@@ -16,7 +16,7 @@ export const Employer: React.FC<{ routes: any }> = ({ routes }) => {
       <Row>
         <Col md={4}>
           <div>
-            <Link to="profile">
+            <Link to="profileInfo">
               <CardImg
                 id="sideBtn"
                 alt="..."
@@ -32,7 +32,7 @@ export const Employer: React.FC<{ routes: any }> = ({ routes }) => {
             </Link>
           </div>
           <div>
-            <Link to="find">
+            <Link to="findEmployee">
               <Button className="m-3" variant="success" id="sideBtn">
                 Tìm kiếm ứng viên
               </Button>

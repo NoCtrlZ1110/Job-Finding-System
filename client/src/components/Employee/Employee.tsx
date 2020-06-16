@@ -14,7 +14,7 @@ export const Employee: React.FC<{ routes: any }> = ({ routes }) => {
         <Col />
         <Col md={3}>
           <div>
-            <Link to="profile">
+            <Link to="profileInfo">
               <CardImg
                 id="sideBtn"
                 alt="..."
@@ -37,7 +37,7 @@ export const Employee: React.FC<{ routes: any }> = ({ routes }) => {
             </Link>
           </div>
           <div>
-            <Link to="find">
+            <Link to="findJob">
               <Button className="m-3" variant="info" id="sideBtn">
                 Tìm kiếm việc làm
               </Button>

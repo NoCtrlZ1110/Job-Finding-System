@@ -33,7 +33,7 @@ export const Select: React.FC<any> = ({ routes }) => {
                     <Col md={3} />
                     <Col className="mb-5 mb-md-0">
                       <Card className="card-lift--hover shadow border-0">
-                        <Link to="/employer/profile">
+                        <Link to="/employer/profileInfo">
                           <CardImg
                             alt="..."
                             src={require("../../img/employer.png")}
@@ -48,7 +48,7 @@ export const Select: React.FC<any> = ({ routes }) => {
                     <Col md={3} />
                     <Col className="mb-5 mb-lg-0 ">
                       <Card className="card-lift--hover shadow border-0">
-                        <Link to="/employee/profile">
+                        <Link to="/employee/profileInfo">
                           <CardImg
                             alt="..."
                             src={require("../../img/employee.png")}
