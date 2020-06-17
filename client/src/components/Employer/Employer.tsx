@@ -16,7 +16,7 @@ export const Employer: React.FC<{ routes: any }> = ({ routes }) => {
       <Row>
         <Col md={4}>
           <div>
-            <Link to="profileInfo">
+            <Link to="/employer/profileInfo">
               <CardImg
                 id="sideBtn"
                 alt="..."
@@ -25,21 +25,28 @@ export const Employer: React.FC<{ routes: any }> = ({ routes }) => {
             </Link>
           </div>
           <div>
-            <Link to="list">
+            <Link to="/employer/myJobs">
               <Button className="m-3 mt-4" variant="secondary" id="sideBtn">
+                Việc làm của bạn
+              </Button>
+            </Link>
+          </div>
+          <div>
+            <Link to="/employer/list">
+              <Button className="m-3 mt-4" variant="primary" id="sideBtn">
                 Tất cả ứng viên
               </Button>
             </Link>
           </div>
           <div>
-            <Link to="findEmployee">
+            <Link to="/employer/findEmployee">
               <Button className="m-3" variant="success" id="sideBtn">
                 Tìm kiếm ứng viên
               </Button>
             </Link>
           </div>
           <div>
-            <Link to="create">
+            <Link to="/employer/create">
               <Button className="m-3" variant="info" id="sideBtn">
                 Tạo hồ sơ tuyển dụng
               </Button>

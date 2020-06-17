@@ -6,13 +6,15 @@ import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { faPlusCircle, faSearch } from "@fortawesome/free-solid-svg-icons";
 import Modal from "react-bootstrap/Modal";
 import HTTP from "../../../services/request";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Table from "react-bootstrap/Table";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import BootstrapTable from "react-bootstrap-table-next";
+import paginationFactory from "react-bootstrap-table2-paginator";
 
 export const CreateProfile: React.FC = () => {
   const [show, setShow] = useState(false);
@@ -60,6 +62,88 @@ export const CreateProfile: React.FC = () => {
       });
   };
 
+  //---
+  const [show2, setShow2] = useState(false);
+  const [data, setData] = useState();
+
+  const handleClose2 = () => setShow2(false);
+  const handleShow2 = () => setShow2(true);
+
+  const options = {
+    // pageStartIndex: 0,
+    sizePerPage: 3,
+    hideSizePerPage: true,
+    hidePageListOnlyOnePage: true,
+  };
+
+  const columns = [
+    {
+      dataField: "employerJobId",
+      text: "ID",
+    },
+    {
+      dataField: "name",
+      text: "Tên công ty/tổ chức",
+    },
+    {
+      dataField: "area",
+      text: "Khu Vực",
+    },
+    {
+      dataField: "nameJob",
+      text: "Tên công việc",
+    },
+    {
+      dataField: "job",
+      text: "Ngành",
+    },
+    {
+      dataField: "jobDetail",
+      text: "Cụ thể",
+    },
+    {
+      dataField: "time",
+      text: "Thời gian",
+    },
+    {
+      dataField: "salary",
+      text: "Lương",
+    },
+    {
+      dataField: "count",
+      text: "Số lượng",
+    },
+
+    {
+      dataField: "employerJobId",
+      text: "Action",
+      formatter: (cellContent: any, row: any) => {
+        let link = `/employee/job/${cellContent}`;
+        return (
+          <a className="btn btn-success" href={link}>
+            Chi tiết
+          </a>
+        );
+      },
+    },
+  ];
+
+  const handleSearch = (event: any) => {
+    event.preventDefault();
+    axios
+      .get(HTTP.SERVER + "employee/find", {
+        withCredentials: true,
+      })
+      .then((response) => response.data)
+      .then((data) => {
+        if (data === "no result") toast.error("Không tìm thấy kết quả nào!");
+        else {
+          setData(data);
+          handleShow2();
+        }
+      });
+  };
+
   return (
     <>
       <Container>
@@ -71,6 +155,14 @@ export const CreateProfile: React.FC = () => {
                   <h5 className="p-2 flex-grow-1 bd-highlight">
                     <b>HỒ SƠ VIỆC LÀM</b>
                   </h5>
+                  <Button
+                    variant="success"
+                    className="mr-3 p-2 bd-highlight"
+                    onClick={handleSearch}
+                  >
+                    Việc làm phù hợp
+                    <FontAwesomeIcon className="ml-2" icon={faSearch} />
+                  </Button>
                   <Button
                     variant="success"
                     className="mr-3 p-2 bd-highlight"
@@ -228,6 +320,34 @@ export const CreateProfile: React.FC = () => {
             </Button>
           </Modal.Footer>
         </Form>
+      </Modal>
+
+      <Modal
+        show={show2}
+        onHide={handleClose2}
+        centered
+        size="lg"
+        id="resultModal"
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Kết quả tìm kiếm</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="search">
+          <h2>Đã tìm thấy {data ? data.length : "0"} kết quả!</h2>
+
+          <BootstrapTable
+            keyField="id"
+            id="table"
+            data={data}
+            columns={columns}
+            pagination={paginationFactory(options)}
+          />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={handleClose2}>
+            Close
+          </Button>
+        </Modal.Footer>
       </Modal>
     </>
   );

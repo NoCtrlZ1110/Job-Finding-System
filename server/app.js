@@ -498,7 +498,7 @@ app.get("/employer/job/:id", function (req, res) {
       [req.session.employerId, req.params.id, req.session.employerId],
       function (err, response) {
         if (response.length > 0) {
-          res.json(response);
+          res.json(response[0]);
         } else res.json("not your job");
       }
     );
@@ -596,7 +596,7 @@ app.post("/employer/job/:id1/find/:id2/invite", function (req, res) {
       response1
     ) {
       if (response1.length > 0)
-        mysql.query(sql, [req.params.id1, req.params.id2], function (
+        mysql.query(sql, [req.params.id2, req.params.id1], function (
           err,
           response
         ) {
@@ -617,7 +617,7 @@ app.post("/employer/job/:id1/find/:id2/ignore", function (req, res) {
       response1
     ) {
       if (response1.length > 0)
-        mysql.query(sql, [req.params.id1, req.params.id2], function (
+        mysql.query(sql, [req.params.id2, req.params.id1], function (
           err,
           response
         ) {
@@ -686,7 +686,7 @@ app.post("/employer/job/:id1/find/:id2/fire", function (req, res) {
       response1
     ) {
       if (response1.length > 0)
-        mysql.query(sql, [req.params.id1, req.params.id2], function (
+        mysql.query(sql, [req.params.id2, req.params.id1], function (
           err,
           response
         ) {

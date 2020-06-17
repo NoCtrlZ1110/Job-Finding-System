@@ -38,8 +38,15 @@ export const Employee: React.FC<{ routes: any }> = ({ routes }) => {
           </div>
           <div>
             <Link to="findJob">
-              <Button className="m-3" variant="info" id="sideBtn">
+              <Button className="m-3" variant="primary" id="sideBtn">
                 Tìm kiếm việc làm
+              </Button>
+            </Link>
+          </div>
+          <div>
+            <Link to="invitation">
+              <Button className="m-3" variant="info" id="sideBtn">
+                Lời mời làm việc
               </Button>
             </Link>
           </div>

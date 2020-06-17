@@ -10,30 +10,30 @@ import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 import axios from "axios";
 import HTTP from "../../../services/request";
+import history from "../../../services/history";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 
-const EmployeeJobDetail: React.FC = () => {
+const MyJobDetail: React.FC = () => {
   let { id }: any = useParams();
-  const [info, setInfo]: any = useState(null);
+  const [job, setJob]: any = useState(null);
 
   useEffect(() => {
     axios
-      .get(HTTP.SERVER + "employer/find/" + id, { withCredentials: true })
+      .get(HTTP.SERVER + "employer/job/" + id, { withCredentials: true })
       .then((response) => response.data)
-      .then((data) => setInfo(data));
+      .then((data) => {
+        toast(data);
+        setJob(data);
+      });
   }, [id]);
 
-  // ---
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  const [list, setList] = useState([]);
+  //---
 
   let handleInvite = (id2: number) => {
     axios
       .post(
-        HTTP.SERVER + `employer/job/${id2}/find/${id}/invite`,
+        HTTP.SERVER + `employer/job/${id}/find/${id2}/invite`,
         {},
         {
           withCredentials: true,
@@ -41,22 +41,15 @@ const EmployeeJobDetail: React.FC = () => {
       )
       .then((response) => response.data)
       .then((data) => {
-        if (data === "ok") {
-          toast.success(`🤩 Mời việc ${info ? info.name : ""} thành công!`);
-          handleClose();
-        } else toast.error("🥱 Mời việc thất bại");
+        if (data === "ok") toast.success("🤩 Mời việc thành công!");
+        else toast.error("🥱 Mời việc thất bại");
       });
   };
 
-  const getEmployee = () => {
-    axios
-      .get(HTTP.SERVER + "employer/job", { withCredentials: true })
-      .then((response) => response.data)
-      .then((data) => {
-        setList(data);
-      });
-  };
-  useEffect(() => getEmployee(), []);
+  const [show, setShow] = useState(false);
+  const [data, setData] = useState();
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const options = {
     // pageStartIndex: 0,
@@ -67,29 +60,74 @@ const EmployeeJobDetail: React.FC = () => {
 
   const columns = [
     {
-      dataField: "employerJobId",
+      dataField: "employeeId",
       text: "ID",
     },
     {
-      dataField: "namejob",
+      dataField: "name",
       text: "Name",
     },
 
     {
-      dataField: "employerJobId",
-      text: "Action",
+      dataField: "job",
+      text: "Ngành",
+    },
+
+    {
+      dataField: "jobDetail",
+      text: "Mô tả",
+    },
+    {
+      dataField: "salary",
+      text: "Lương mong muốn",
+    },
+
+    {
+      dataField: "employeeId",
+      text: "Chi tiết",
+      formatter: (cellContent: any, row: any) => {
+        let link = `/employer/employeeInfo/${cellContent}`;
+        return (
+          <a className="btn btn-sm btn-success" href={link}>
+            Chi tiết
+          </a>
+        );
+      },
+    },
+    {
+      dataField: "employeeId",
+      text: "Tuyển dụng",
       formatter: (cellContent: any, row: any) => {
         return (
           <Button
-            className="btn btn-sm btn-success"
+            className="btn btn-success btn-sm"
             onClick={() => handleInvite(cellContent)}
           >
-            Tuyển dụng
+            Tuyển Dụng
           </Button>
         );
       },
     },
   ];
+
+  const handleSearch = (event: any) => {
+    event.preventDefault();
+    console.log(event);
+
+    axios
+      .get(HTTP.SERVER + `employer/job/${id}/find`, {
+        withCredentials: true,
+      })
+      .then((response) => response.data)
+      .then((data) => {
+        if (data === "not found") {
+          toast.error("🙄 Không tìm thấy két quả nào!");
+        } else {
+          setData(data);
+          handleShow();
+        }
+      });
+  };
 
   return (
     <>
@@ -117,18 +155,31 @@ const EmployeeJobDetail: React.FC = () => {
                       <Button
                         className="mr-4"
                         color="info"
-                        onClick={handleShow}
+                        onClick={handleSearch}
                         size="sm"
                       >
-                        Tuyển dụng
+                        Tìm ứng viên
+                      </Button>
+                      <Button
+                        className="mr-4"
+                        color="info"
+                        onClick={history.goBack}
+                        size="sm"
+                      >
+                        Quay lại
                       </Button>
                     </div>
                   </Col>
                   <Col className="order-lg-1" lg="4">
                     <div className="card-profile-stats d-flex justify-content-center">
                       <div>
+                        <span className="heading">{job ? job.count : ""}</span>
+                        <span className="description">Số lượng</span>
+                      </div>
+
+                      <div>
                         <span className="heading">
-                          {info ? info.salary + "$" : ""}
+                          {job ? job.salary + "$" : ""}
                         </span>
                         <span className="description">Lương (/giờ)</span>
                       </div>
@@ -136,57 +187,46 @@ const EmployeeJobDetail: React.FC = () => {
                   </Col>
                 </Row>
                 <div className="text-center mt-5">
-                  <h3>
-                    {info ? info.name : ""}
-                    <span className="font-weight-light">
-                      , {info ? info.age : ""}
-                    </span>
-                  </h3>
+                  <h3>{job ? job.nameJob : ""}</h3>
 
                   <Table responsive>
                     <br />
                     <tbody>
                       <tr>
-                        <td>Giới tính</td>
-                        <td>{info ? info.sex : ""}</td>
+                        <td>Vai trò</td>
+                        <td>{job ? job.nameJob : ""}</td>
                       </tr>
                       <tr>
                         <td>Công việc</td>
-                        <td>{info ? info.job : ""}</td>
+                        <td>{job ? job.job : ""}</td>
                       </tr>
                       <tr>
                         <td>Mô tả</td>
-                        <td>{info ? info.jobDetail : ""}</td>
+                        <td>{job ? job.job : ""}</td>
                       </tr>
-
+                      <tr>
+                        <td>Số lượng</td>
+                        <td>{job ? job.count : ""}</td>
+                      </tr>
                       <tr>
                         <td>Thời gian</td>
-                        <td>{info ? info.time : ""}</td>
-                      </tr>
-
-                      <tr>
-                        <td>Lương mong muốn</td>
-                        <td>{info ? info.salary + "$ / giờ" : ""}</td>
+                        <td>{job ? job.time : ""}</td>
                       </tr>
                       <tr>
-                        <td>Ưu điểm</td>
-                        <td>{info ? info.talent : ""}</td>
+                        <td>Làm việc từ</td>
+                        <td>
+                          {job
+                            ? JSON.stringify(job.dateStart).slice(1, 11)
+                            : ""}
+                        </td>
                       </tr>
                       <tr>
-                        <td>Khu vực</td>
-                        <td>{info ? info.area : ""}</td>
+                        <td>Lương</td>
+                        <td>{job ? job.salary + "$ / giờ" : ""}</td>
                       </tr>
                       <tr>
-                        <td>Địa chỉ</td>
-                        <td>{info ? info.address : ""}</td>
-                      </tr>
-                      <tr>
-                        <td>Điện thoại</td>
-                        <td>{info ? info.phone : ""}</td>
-                      </tr>
-                      <tr>
-                        <td>Email</td>
-                        <td>{info ? info.email : ""}</td>
+                        <td>Yêu cầu</td>
+                        <td>{job ? job.require : ""}</td>
                       </tr>
                     </tbody>
                   </Table>
@@ -224,34 +264,23 @@ const EmployeeJobDetail: React.FC = () => {
         id="resultModal"
       >
         <Modal.Header closeButton>
-          <Modal.Title>Which job?</Modal.Title>
+          <Modal.Title>Kết quả tìm kiếm</Modal.Title>
         </Modal.Header>
-        <Modal.Body className=" text-center">
-          {list.length > 0 ? (
-            <>
-              <h2>
-                Bạn muốn tuyển dụng {info ? info.name : ""} vào công việc nào?
-              </h2>
-              <br />
-              <br />
-              <BootstrapTable
-                keyField="id"
-                id="table"
-                data={list}
-                columns={columns}
-                pagination={paginationFactory(options)}
-              />
-            </>
-          ) : (
-            <>
-              <h2>Bạn chưa tạo việc làm nào!</h2>
-              <br />
-              <br />
-              <Button href="/employer/create" className="btn-success">
-                Tạo việc làm
-              </Button>
-            </>
-          )}
+        <Modal.Body className="search text-center">
+          <h2>
+            Đã tìm thấy {data ? data.length : "0"} ứng viên phù hợp với công
+            việc "{job ? job.nameJob : ""}" !
+          </h2>
+          <br />
+          <br />
+
+          <BootstrapTable
+            keyField="id"
+            id="table"
+            data={data}
+            columns={columns}
+            pagination={paginationFactory(options)}
+          />
         </Modal.Body>
         <Modal.Footer>
           <Button variant="danger" onClick={handleClose}>
@@ -263,4 +292,4 @@ const EmployeeJobDetail: React.FC = () => {
   );
 };
 
-export default EmployeeJobDetail;
+export default MyJobDetail;

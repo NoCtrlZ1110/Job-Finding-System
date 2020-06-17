@@ -20,6 +20,9 @@ import HTTP from "./services/request";
 import { toast } from "react-toastify";
 import JobDetail from "./components/Employee/JobDetail/JobDetail";
 import EmployeeJobDetail from "./components/Employer/EmployeeJobDetail/EmployeeJobDetail";
+import { MyJobs } from "./components/Employer/MyJobs/MyJobs";
+import MyJobDetail from "./components/Employer/MyJobDetail/MyJobDetail";
+import { Invitation } from "./components/Employee/Invitation/Invitation";
 
 const routes = [
   {
@@ -75,6 +78,12 @@ const routes = [
         exact: true,
         role: "employee",
       },
+      {
+        path: "/employee/invitation",
+        component: Invitation,
+        exact: true,
+        role: "employee",
+      },
     ],
   },
   {
@@ -105,6 +114,18 @@ const routes = [
         path: "/employer/create",
         role: "employer",
         component: CreateJob,
+        private: true,
+      },
+      {
+        path: "/employer/myJobs/:id",
+        role: "employer",
+        component: MyJobDetail,
+        private: true,
+      },
+      {
+        path: "/employer/myJobs",
+        role: "employer",
+        component: MyJobs,
         private: true,
       },
     ],

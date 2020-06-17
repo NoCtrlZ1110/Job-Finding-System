@@ -152,7 +152,7 @@ export const NavBar: React.FC<{}> = () => {
                         </Media>
                         <Media
                           className="d-flex align-items-center"
-                          href={"/" + (role ? role : "employee") + "/find"}
+                          href={"/" + (role ? role : "employee") + "/findJob"}
                           // target="_blank"
                         >
                           <div className="icon icon-shape bg-gradient-success rounded-circle text-white">

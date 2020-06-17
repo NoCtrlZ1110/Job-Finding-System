@@ -32,7 +32,10 @@ export const CreateJob: React.FC = () => {
         withCredentials: true,
       })
       .then((response) => response.data)
-      .then((msg) => toast("😎" + msg));
+      .then((msg) => {
+        if (msg === "done") toast("😎 Tạo việc làm thành công");
+        else toast("🙄 Tạo việc làm thất bại");
+      });
   };
 
   return (

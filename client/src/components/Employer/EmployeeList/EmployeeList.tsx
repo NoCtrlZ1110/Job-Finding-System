@@ -80,7 +80,9 @@ export const EmployeeList: React.FC = () => {
           <h5>
             <Row>
               <Col>
-                <div className="mt-3">THỐNG KÊ NGƯỜI TÌM VIỆC HIỆN CÓ</div>
+                <div className="mt-3">
+                  <b>THỐNG KÊ NGƯỜI TÌM VIỆC HIỆN CÓ</b>
+                </div>
               </Col>
             </Row>
           </h5>

@@ -34,7 +34,7 @@ export const JobList: React.FC = () => {
     },
     {
       dataField: "name",
-      text: "Name",
+      text: "Tên công ty/tổ chức",
     },
     {
       dataField: "area",
