@@ -1,84 +1,67 @@
-# Get Started // bắt đầu
+#  [Deployed here 😎](http://csdl.noctrlz.me/) - [Documentation Here 📄](https://docs.google.com/document/d/1e4yMG2JYBufZC3uLLWjkyd3XNV10smsWePph4cOhaX4/edit?usp=sharing)
 
-# Người Tìm việc // làm việc với người tìm việc
 
-## Tìm kiếm việc làm :
+# Giới thiệu
+Hệ thống tuyển dụng việc làm hướng đến hai đối tượng là người ứng tuyển và người tuyển dụng. Người ứng tuyển có thể tạo hồ sơ cá nhân và ứng tuyển tại các công ty mình mong muốn. Người tuyển dụng tạo hồ sơ đưa ra thông tin về công ty của mình, yêu cầu tiêu chí tuyển dụng và nhận người ứng tuyển. 
+Hệ thống nhằm hướng tới mục tiêu người ứng tuyển và nhà tuyển dụng có thể xem tìm kiếm nhanh chóng tiết kiệm thời gian .
+Công nghệ sử dụng : 
+- `Front-end:	ReactJs`
+- `Back-end:	NodeJs`
+- `Database:	MySQL`
 
-- `khu vực`
-- `Loại Công việc`
-- `Thời gian`
-- `Mức lương` // nhập thông tin mình muốn tìm kiếm
-- `Tìm việc` // in ra các thông tin công việc mà người dùng mong muốn
-  - `chi tiết` : hiện ra đầy đủ thông tin liên quan đến công việc mà người tìm việc quan tâm
-    - tên công ty
-    - mã tuyển dụng
-    - địa chỉ
-    - loại công việc
-    - thời gian
-    - mức lương
-    - yêu cầu
-    - email
-    - ghi chú
-  - nhận việc : //điền thông tin đầy đủ của người tìm việc để gửi thông tin đến nhà tuyển dụng
 
-## Tạo hồ sơ xin việc : - Nhập thông tin cần thiết
+# Cơ sở dữ liệu
 
-- Tạo Hồ sơ : // lưu thông tin người tìm việc
+Cơ sở dữ liệu bao gồm các bảng sau:
+- employeeaccount : lưu trữ tài khoản người tìm việc
+  
+- employee : lưu trữ thông tin người tìm việc 
+- employeejob : lưu trữ thông tin việc làm của người tìm việc
+- employerccount : lưu trữ tài khoản của nhà tuyển dụng 
+- employer : lưu trữ thông tin của nhà tuyển dụng 
+- employerjob : lưu trữ thông tin công việc của nhà tuyển dụng tuyển
+- apply : lưu trữ thông tin các nhà tuyển dụng và người tìm việc đã đăng ký với nhau
 
-# Nhà tuyển dụng // làm việc với nhà tuyển dụng
+# Chức năng
 
-2.1 Tìm kiếm ứng viên :
-// Nhập thông tin muốn tìm kiếm
-// tìm ứng viên
-// in ra thông tin các ứng viên
 
-- chi tiết :
-  // in ra thông tin đầy đủ của ứng viên
-- tuyển dụng :
-  // thông tin nhà tuyển dụng gửi đến người ứng tuyển
-  2.2 Tạo hồ sơ tuyển dụng :
-- Nhập thông tin cần thiết
-  - Tạo Hồ sơ : // lưu thông tin hồ sơ tuyển dụng
+
+## Login 
+
+
+## `Người Tìm việc`
+
+- ### Profile 
+- ### Tìm kiếm việc làm
+- ### Thống kê tất cả việc làm 
+- ### Tìm việc
+- ### Xin việc
+- ### Từ chối lời mời làm việc :
+- ### Các công việc phù hợp 
+- ### Lời mời từ nhà tuyển dụng
+- ### Công việc đã nhận 
+- ### Nghỉ Việc 
+- ### Tạo hồ sơ xin việc
+
+## `Nhà tuyển dụng`
+
+- ### Profile
+- ### Tìm kiếm ứng viên
+- ### Tất cả ứng viên
+- ### Chi tiết người tìm việc
+- ### Mời làm việc
+- ### Từ chối tuyển dụng
+- ### Các hồ sơ xin việc
+- ### Các hồ sơ trúng tuyển
+- ### Đuổi việc
+- ### Tìm người tìm việc phù hợp
+- ### Tạo hồ sơ công việc 
+- ### Danh sách các việc làm
+- ### Chi tiết các công việc 
+
 
 ## How to run :
 
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- ``` npm install ```
+- ``` npm run build ```
+- ``` npm start ```
