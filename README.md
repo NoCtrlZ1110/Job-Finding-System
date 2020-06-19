@@ -1,4 +1,4 @@
-#  [Deployed here 😎](http://csdl.noctrlz.me/) - [Documentation Here 📄](https://docs.google.com/document/d/1e4yMG2JYBufZC3uLLWjkyd3XNV10smsWePph4cOhaX4/edit?usp=sharing)
+#  [Deployed here 😎](http://csdl.noctrlz.me/) - [Documentation here 📄](https://docs.google.com/document/d/1e4yMG2JYBufZC3uLLWjkyd3XNV10smsWePph4cOhaX4/edit?usp=sharing)
 
 
 # Giới thiệu
@@ -22,11 +22,20 @@ Cơ sở dữ liệu bao gồm các bảng sau:
 - employerjob : lưu trữ thông tin công việc của nhà tuyển dụng tuyển
 - apply : lưu trữ thông tin các nhà tuyển dụng và người tìm việc đã đăng ký với nhau
 
+#
+
+![Cấu trúc cơ sở dữ liệu](https://i.ibb.co/GCcDmT9/Annotation-2020-06-20-031407.png)
+
+![Cấu trúc cơ sở dữ liệu](https://i.ibb.co/LrLRXYt/Annotation-2020-06-20-031118.png)
+
+
 # Chức năng
 
 
 
-## Login 
+## `Login`
+## `Register`
+
 
 
 ## `Người Tìm việc`
