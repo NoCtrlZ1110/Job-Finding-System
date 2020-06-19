@@ -41,8 +41,10 @@ const MyJobDetail: React.FC = () => {
       )
       .then((response) => response.data)
       .then((data) => {
-        if (data === "ok") toast.success("🤩 Mời việc thành công!");
-        else toast.error("🥱 Mời việc thất bại");
+        if (data === "ok") {
+          handleClose();
+          toast.success("🤩 Mời việc thành công!");
+        } else toast.error("🥱 Mời việc thất bại");
       });
   };
 
@@ -266,7 +268,7 @@ const MyJobDetail: React.FC = () => {
         <Modal.Header closeButton>
           <Modal.Title>Kết quả tìm kiếm</Modal.Title>
         </Modal.Header>
-        <Modal.Body className="search text-center">
+        <Modal.Body className=" text-center">
           <h2>
             Đã tìm thấy {data ? data.length : "0"} ứng viên phù hợp với công
             việc "{job ? job.nameJob : ""}" !

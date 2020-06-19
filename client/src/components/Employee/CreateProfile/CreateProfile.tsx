@@ -333,7 +333,9 @@ export const CreateProfile: React.FC = () => {
           <Modal.Title>Kết quả tìm kiếm</Modal.Title>
         </Modal.Header>
         <Modal.Body className="search">
-          <h2>Đã tìm thấy {data ? data.length : "0"} kết quả!</h2>
+          <h2>
+            Đã tìm thấy {data ? data.length : "0"} việc làm phù hợp với hồ sơ !
+          </h2>
 
           <BootstrapTable
             keyField="id"

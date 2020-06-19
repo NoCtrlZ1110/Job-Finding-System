@@ -34,7 +34,7 @@ export const Employer: React.FC<{ routes: any }> = ({ routes }) => {
           <div>
             <Link to="/employer/list">
               <Button className="m-3 mt-4" variant="primary" id="sideBtn">
-                Tất cả ứng viên
+                Thống kê người tìm việc
               </Button>
             </Link>
           </div>

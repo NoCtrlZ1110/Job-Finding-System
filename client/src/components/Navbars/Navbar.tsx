@@ -173,7 +173,14 @@ export const NavBar: React.FC<{}> = () => {
                         </Media>
                         <Media
                           className="d-flex align-items-center"
-                          href={"/" + (role ? role : "employee") + "/list"}
+                          href={
+                            "/" +
+                            (role
+                              ? role === "employee"
+                                ? "employee/invitation"
+                                : "employer/myJobs"
+                              : "")
+                          }
                           // target="_blank"
                         >
                           <div className="icon icon-shape bg-gradient-warning rounded-circle text-white">
@@ -182,11 +189,13 @@ export const NavBar: React.FC<{}> = () => {
                           <Media body className="ml-3">
                             <h5 className="heading text-warning mb-md-1">
                               {role === "employer"
-                                ? "Ứng viên phù hợp"
-                                : "Công việc phù hợp"}
+                                ? "Ứng viên xin việc"
+                                : "Lời mời làm việc"}
                             </h5>
                             <p className="description d-none d-md-inline-block mb-0">
-                              Lọc theo hồ sơ của bạn đưa ra kết quả phù hợp nhất
+                              {role === "employer"
+                                ? "Các ứng viên muốn tham gia công việc của bạn"
+                                : "Các việc làm muốn mời bạn tham gia"}
                             </p>
                           </Media>
                         </Media>
